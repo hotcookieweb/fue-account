@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
         $this->middleware('auth');
     }
-	
+
     public function orders() {
 		$params = [
 			'per_page' => 10,
@@ -26,5 +26,15 @@ class OrderController extends Controller
 		$orders = Woocommerce::get('orders', $params);
 
 		return view('orders')->with('orders', $orders);
+	}
+
+	public function order($id) {
+		$params = [
+			'id' => $id
+		];
+
+		$order = Woocommerce::get('orders', $params)[0];
+
+		return view('order')->with('order', $order);
 	}
 }

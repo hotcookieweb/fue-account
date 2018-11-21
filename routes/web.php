@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/orders', 'OrderController@orders');
+Route::get('/orders/{id}', 'OrderController@order');

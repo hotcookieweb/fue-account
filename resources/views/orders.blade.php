@@ -19,8 +19,8 @@
 					<p>
 						@foreach($orders as $order)
 							<p>
-								<a href="/order/{{ $order['id'] }}">
-									<i># {{ $order['number'] }} {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}</i> |
+								<a href="/orders/{{ $order['id'] }}">
+									<i>#{{ $order['number'] }} {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}</i> |
 									<b> {{ date("F jS Y", strtotime($order['number'])) }}</b> |
 									<i> {{ $order['status'] }}</i> |
 									<b> ${{ $order['total'] }}</b>
