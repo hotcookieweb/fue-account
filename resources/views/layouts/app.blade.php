@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Hot Cookie Mobile Access') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+	<div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -34,7 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 						<li class="nav-item">
+							<a class="nav-link" href="/">{{ __('Home') }}</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="/orders">{{ __('Orders') }}</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/board">{{ __('Board') }}</a>
 						</li>
                     </ul>
 
