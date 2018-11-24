@@ -1,17 +1,32 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<a href="/home">Home</a><br>
-		<link rel="stylesheet" href="/css/jkanban.min.css">
-		<link rel="stylesheet" href="/css/style.css">
+@extends('layouts.app')
 
-		<div id="theboard"></div>
+@section('content')
+	<link rel="stylesheet" href="/css/style.css">
 
-		<script src="/js/jkanban.min.js"></script>
-		<script src="/js/board.js"></script>
-	</body>
-</html>
+	<div class="row board">
+		<div class="col-lg-2">
+			<h3>unknown</h3>
+			<p></p>
+		</div>
+
+		<div class="col-lg-2">
+			<h3>Upcoming</h3>
+			<p></p>
+		</div>
+
+		<div class="col-lg-2">
+			<h3>Prepare Today</h3>
+			<p></p>
+		</div>
+
+		<div class="col-lg-2">
+			<h3>Ship Today</h3>
+			<p></p>
+		</div>
+
+		<div class="col-lg-2">
+			<h3>Shipped</h3>
+			<p></p>
+		</div>
+	</div>
+@endsection
