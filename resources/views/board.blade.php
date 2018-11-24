@@ -6,7 +6,13 @@
 	<div class="row board">
 		<div class="col-lg-2">
 			<h3>unknown</h3>
-			<p></p>
+			<ul>
+				@foreach($orders as $order)
+					<li>
+						<i>#{{ $order['number'] }} {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}</i>
+					</li>
+				@endforeach
+			</ul>
 		</div>
 
 		<div class="col-lg-2">

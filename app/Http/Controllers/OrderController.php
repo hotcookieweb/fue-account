@@ -37,4 +37,14 @@ class OrderController extends Controller
 
 		return view('order')->with('order', $order);
 	}
+
+	public function board() {
+		$params = [
+			'status' => 'processing'
+		];
+
+		$orders = Woocommerce::get('orders', $params);
+
+		return view('board')->with('orders', $orders);
+	}
 }
