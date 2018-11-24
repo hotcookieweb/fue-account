@@ -3,48 +3,48 @@ var boards = [
         "id"    : "board-upcoming",               // id of the board
         "title" : "Upcoming",              // title of the board
         "class" : "",        // css classes to add at the title
-        "dragTo": [],   // array of ids of boards where items can be dropped (default: [])
+        "dragTo": ["board-upcoming", "board-prepare-today", "board-ship-today", "board-shipped"],   // array of ids of boards where items can be dropped (default: [])
         "item"  : [                           // item of this board
-            // {
-            //     "id"    : "item-id-1",        // id of the item
-            //     "title" : "Item 1"            // title of the item
-            // },
+            {
+                "id"    : "item-id-1",        // id of the item
+                "title" : "Item 1"            // title of the item
+            },
         ]
     },
 	{
         "id"    : "board-prepare-today",               // id of the board
         "title" : "Prepare Today",              // title of the board
         "class" : "",        // css classes to add at the title
-        "dragTo": [],   // array of ids of boards where items can be dropped (default: [])
+        "dragTo": ["board-upcoming", "board-prepare-today", "board-ship-today", "board-shipped"],   // array of ids of boards where items can be dropped (default: [])
         "item"  : [                           // item of this board
-            // {
-            //     "id"    : "item-id-1",        // id of the item
-            //     "title" : "Item 1"            // title of the item
-            // },
+            {
+                "id"    : "item-id-2",        // id of the item
+                "title" : "Item 2"            // title of the item
+            },
         ]
     },
 	{
         "id"    : "board-ship-today",               // id of the board
         "title" : "Ship Today",              // title of the board
         "class" : "",        // css classes to add at the title
-        "dragTo": [],   // array of ids of boards where items can be dropped (default: [])
+        "dragTo": ["board-upcoming", "board-prepare-today", "board-ship-today", "board-shipped"],   // array of ids of boards where items can be dropped (default: [])
         "item"  : [                           // item of this board
-            // {
-            //     "id"    : "item-id-1",        // id of the item
-            //     "title" : "Item 1"            // title of the item
-            // },
+            {
+                "id"    : "item-id-3",        // id of the item
+                "title" : "Item 3"            // title of the item
+            },
         ]
     },
 	{
         "id"    : "board-shipped",               // id of the board
         "title" : "Shipped",              // title of the board
         "class" : "",        // css classes to add at the title
-        "dragTo": [],   // array of ids of boards where items can be dropped (default: [])
+        "dragTo": ["board-upcoming", "board-prepare-today", "board-ship-today", "board-shipped"],   // array of ids of boards where items can be dropped (default: [])
         "item"  : [                           // item of this board
-            // {
-            //     "id"    : "item-id-1",        // id of the item
-            //     "title" : "Item 1"            // title of the item
-            // },
+            {
+                "id"    : "item-id-4",        // id of the item
+                "title" : "Item 4"            // title of the item
+            },
         ]
     },
 ];
@@ -56,7 +56,7 @@ var kanban = new jKanban({
     responsivePercentage: false,                                    // if it is true I use percentage in the width of the boards and it is not necessary gutter and widthBoard
     boards          : boards,                                           // json of boards
     dragBoards      : true,                                         // the boards are draggable, if false only item can be dragged
-    addItemButton   : false,                                        // add a button to board for easy item creation
+    addItemButton   : true,                                        // add a button to board for easy item creation
     buttonContent   : '+',                                          // text or html content of the board button
     click           : function (el) {},                             // callback when any board's item are clicked
     dragEl          : function (el, source) {},                     // callback when any board's item are dragged
