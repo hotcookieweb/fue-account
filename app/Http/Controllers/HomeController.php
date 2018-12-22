@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Woocommerce;
+
 
 class HomeController extends Controller
 {
@@ -21,13 +23,26 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function dashboard()
     {
-        return view('home');
+        $completed = count(Woocommerce::get('orders', ['status' => 'completed']));
+        $processing = count(Woocommerce::get('orders', ['status' => 'processing']));
+        $all = $processing + $completed;
+
+        return view('dashboard')->with([
+          "all" => $all,
+          "completed" => $completed,
+          "processing" => $processing
+        ]);
     }
 
-	public function board()
-	{
-		return view('board');
-	}
+  	public function board()
+  	{
+  		  return view('board');
+  	}
+
+    public function index()
+    {
+      return redirect("/dashboard");
+    }
 }

@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
           						<li class="nav-item">
-          							<a class="nav-link" href="/">{{ __('Home') }}</a>
+          							<a class="nav-link" href="/dashboard">{{ __('Dashboard') }}</a>
           						</li>
                       @if(Auth::user())
             						<li class="nav-item">
