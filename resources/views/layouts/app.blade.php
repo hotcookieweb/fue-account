@@ -9,6 +9,9 @@
 
     <title>{{ config('app.name', 'Hot Cookie Kitchen') }}</title>
 
+    <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

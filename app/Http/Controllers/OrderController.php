@@ -29,11 +29,7 @@ class OrderController extends Controller
 	}
 
 	public function order($id) {
-		$params = [
-			'id' => $id
-		];
-
-		$order = Woocommerce::get('orders', $params)[0];
+		$order = Woocommerce::get("orders/$id");
 
 		return view('order')->with('order', $order);
 	}
@@ -45,6 +41,11 @@ class OrderController extends Controller
 
 		$orders = Woocommerce::get('orders', $params);
 
-		return view('board')->with('orders', $orders);
+    $total_completed = count(Woocommerce::get('orders', ['status'=>'completed']));
+
+		return view('board')->with([
+        "orders" => $orders,
+        "total_completed" => $total_completed
+      ]);
 	}
 }

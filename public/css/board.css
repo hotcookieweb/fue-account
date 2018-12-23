@@ -1,0 +1,115 @@
+.board-number {
+  width: 100%;
+  height: 100px;
+  font-size: 80px;
+  line-height: 100px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  color: black;
+}
+
+.board div {
+	margin: auto;
+	padding: 20px;
+}
+
+.board div h3 {
+	background-color: #71B5D0;
+	color: white;
+	border-radius: 20px 20px 0px 0px;
+	padding: 5px;
+	font-size: 18px;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+.board div p {
+	min-height: 100px;
+	background-color: #BED3E9;
+	margin: 0;
+	padding: 0;
+	border-radius: 0px 0px 25px 25px;
+}
+
+.board div ul {
+	min-height: 100px;
+	background-color: #BED3E9;
+	margin: 0;
+	padding: 5px;
+	border-radius: 0px 0px 25px 25px;
+  list-style-type: none;
+}
+
+.board-list-item {
+  width: 90%;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.board-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+div.board-item {
+  margin: auto;
+  width: 20%;
+  padding: 5px;
+  display: inline-block;
+}
+
+div.board-order-number {
+  font-weight: bold;
+  color: grey;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0;
+}
+
+div.board-prepare-by {
+  font-weight: bold;
+  color: white;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  padding: 0;
+}
+
+div.board-item-count {
+  color: black;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0;
+}
+
+div.board-total-price {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0;
+}
+
+div.board-red {
+  background-color: red;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+div.board-yellow {
+  background-color: yellow;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+div.board-green {
+  background-color: green;
+  padding: 3px;
+  border-radius: 5px;
+}
