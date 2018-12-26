@@ -64,6 +64,16 @@ class OrderController extends Controller
       $_valid_delivery_time = strlen($_delivery_time) > 6 ? true : false;
 
       $today = date("m/d/Y");
+      $prepare_by = "???";
+
+      $order['prepare_by'] = $prepare_by;
+
+      $order['item_total'] = $order['total'] - $order['shipping_total'];
+
+      $order['item_count'] = 0;
+      foreach ($order['line_items'] as $item) {
+        $order['item_count'] += $item['quantity'];
+      }
 
       // If the delivery method is "free_shipping" (local pickup), it needs at least a valid delivery date
       // and will be put in prepare_today if the delivery date is the same as today. Otherwise, if the

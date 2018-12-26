@@ -9,7 +9,7 @@
 			<ul>
 				@foreach($unknown as $order)
 					<li>
-						<i>#{{ $order['number'] }} {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}</i>
+						<a href="/orders/{{ $order['number'] }}">#{{ $order['number'] }}</a>
 					</li>
 				@endforeach
 			</ul>
@@ -21,7 +21,9 @@
 			<ul>
 				@foreach($upcoming as $order)
 					<li>
-						<i>#{{ $order['number'] }} {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}</i>
+						<a href="/orders/{{ $order['number'] }}">
+							#{{ $order['number'] }} {{ $order['prepare_by'] }} QTY: {{ $order['item_count'] }} ${{ $order['item_total'] }}
+						</a>
 					</li>
 				@endforeach
 			</ul>
@@ -42,7 +44,9 @@
 			<ul>
 				@foreach($prepare_today as $order)
 					<li>
-						<i>#{{ $order['number'] }} {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}</i>
+						<a href="/orders/{{ $order['number'] }}">
+							#{{ $order['number'] }} {{ $order['prepare_by'] }} QTY: {{ $order['item_count'] }} ${{ $order['item_total'] }}
+						</a>
 					</li>
 				@endforeach
 			</ul>
@@ -54,7 +58,9 @@
 			<ul>
 				@foreach($ship_today as $order)
 					<li>
-						<i>#{{ $order['number'] }} {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}</i>
+						<a href="/orders/{{ $order['number'] }}">
+							#{{ $order['number'] }} {{ $order['prepare_by'] }} QTY: {{ $order['item_count'] }} ${{ $order['item_total'] }}
+						</a>
 					</li>
 				@endforeach
 			</ul>
