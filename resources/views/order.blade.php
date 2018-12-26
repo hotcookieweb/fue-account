@@ -20,7 +20,7 @@
 							<i>Created </i><b>{{ date("F d, Y", strtotime($order['date_created'])) }}</b><br>
 							<h3>Status ({{ $order['status'] }})</h3>
 
-							<br><br>
+							<br>
 
               <div class="row">
                 <div class="col-lg-6">
@@ -54,7 +54,7 @@
                 </div>
               </div>
 
-              <br><br>
+              <br>
 
 							<h2>Items</h2>
 							<table class="table">
@@ -87,7 +87,7 @@
                 </ul>
               @endforeach
 
-              <br><br>
+              <br>
 
               <h3>Customer Note</h3>
                 @if($order['customer_note'])
