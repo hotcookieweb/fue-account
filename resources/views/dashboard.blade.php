@@ -2,30 +2,14 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!<br>
-
-          					<p>
-          						<!-- Graphs -->
-                      <h2><?php echo $all; ?> Orders</h2>
-                      <canvas id="dashboard-order-chart" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
-                      <!-- End Graphs -->
-          					</p>
-                </div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-lg-4">
+        <!-- Graphs -->
+        <h2 align="center"><?php echo $all; ?> Orders</h2>
+        <canvas id="dashboard-order-chart" width="150" height="150" style="width: 150px; height: 150px;"></canvas>
+        <!-- End Graphs -->
     </div>
+  </div>
 </div>
 
 <script
@@ -39,7 +23,7 @@
     var ctx = document.getElementById("dashboard-order-chart").getContext('2d');
 
     var data = {
-      labels: ["Processing", "Completed"],
+      labels: ["<?php echo $processing; ?> Processing", "<?php echo $completed; ?> Completed"],
       datasets: [
         {
           data: [
