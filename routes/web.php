@@ -20,3 +20,5 @@ Route::get('/board', 'OrderController@board');
 
 Route::get('/orders', 'OrderController@orders');
 Route::get('/orders/{id}', 'OrderController@order');
+
+Route::get('/data/board', 'BoardController@board');

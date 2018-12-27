@@ -34,7 +34,11 @@ class OrderController extends Controller
 		return view('order')->with('order', $order);
 	}
 
-	public function board() {
+  public function board() {
+    return view('board');
+  }
+
+	public function old_board() {
 		$params = [
 			'status' => 'processing'
 		];

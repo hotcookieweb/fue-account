@@ -1,75 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-	<link rel="stylesheet" href="/css/style.css">
-
-	<div class="row board">
-		<div class="col-lg-2">
-			<h3>unknown</h3>
-			<ul>
-				@foreach($unknown as $order)
-					<li>
-						<a href="/orders/{{ $order['number'] }}">#{{ $order['number'] }}</a>
-					</li>
-				@endforeach
-			</ul>
-		</div>
-
-		<div class="col-lg-2">
-			<h3>Upcoming</h3>
-
-			<ul>
-				@foreach($upcoming as $order)
-					<li>
-						<a href="/orders/{{ $order['number'] }}">
-							#{{ $order['number'] }} {{ $order['prepare_by'] }} QTY: {{ $order['item_count'] }} ${{ $order['item_total'] }}
-						</a>
-					</li>
-				@endforeach
-			</ul>
-
-			{{-- <ul>
-				<li class="board-list-item">
-					<div class="board-order-number board-item">#1337</div>
-					<div class="board-prepare-by board-item board-red">11AM</div>
-					<div class="board-item-count board-item"><i class="fa fa-list" aria-hidden="true"></i> 25</div>
-					<div class="board-total-price board-item">$450.00</div>
-				</li>
-			</ul> --}}
-		</div>
-
-		<div class="col-lg-2">
-			<h3>Prepare Today</h3>
-
-			<ul>
-				@foreach($prepare_today as $order)
-					<li>
-						<a href="/orders/{{ $order['number'] }}">
-							#{{ $order['number'] }} {{ $order['prepare_by'] }} QTY: {{ $order['item_count'] }} ${{ $order['item_total'] }}
-						</a>
-					</li>
-				@endforeach
-			</ul>
-		</div>
-
-		<div class="col-lg-2">
-			<h3>Ship Today</h3>
-
-			<ul>
-				@foreach($ship_today as $order)
-					<li>
-						<a href="/orders/{{ $order['number'] }}">
-							#{{ $order['number'] }} {{ $order['prepare_by'] }} QTY: {{ $order['item_count'] }} ${{ $order['item_total'] }}
-						</a>
-					</li>
-				@endforeach
-			</ul>
-		</div>
-
-		<div class="col-lg-2">
-			<h3>Shipped</h3>
-
-			<p class="board-number">{{ $total_completed }}</p>
-		</div>
+	<div class="container">
+		<table data-toggle="table" data-search="true" data-url="/data/board">
+			<thead>
+				<tr>
+					<th data-sortable="true" data-field="number">Order #</th>
+					<th data-sortable="true" data-field="created_at">Created On</th>
+					<th data-sortable="true" data-field="delivery_type">Delivery Type</th>
+					<th data-sortable="true" data-field="prepare_by">Prepare By</th>
+					<th data-sortable="true" data-field="delivery_date">Delivery Date</th>
+					<th data-sortable="true" data-field="delivery_time">Delivery Time</th>
+					<th data-sortable="true" data-field="status">Status</th>
+					<th data-field="packing_slip">Packing Slip</th>
+					<th data-field="edit">Edit</th>
+				</tr>
+			</thead>
+		</table>
 	</div>
 @endsection
