@@ -22,3 +22,9 @@ Route::get('/orders', 'OrderController@orders');
 Route::get('/orders/{id}', 'OrderController@order');
 
 Route::get('/data/board', 'BoardController@board');
+
+Route::get('/data/statuses', 'BoardController@statuses');
+
+Route::get('/logout', 'HomeController@logout');
+
+Route::post('/test', 'OrderController@test');

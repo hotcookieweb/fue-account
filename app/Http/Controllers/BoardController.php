@@ -16,6 +16,18 @@ class BoardController extends Controller
 
       $data = [];
 
+      $statuses = [];
+
+      $statuses[] = [
+        "value" => "processing",
+        "text" => "Processing"
+      ];
+
+      $statuses[] = [
+        "value" => "completed",
+        "text" => "Completed"
+      ];
+
       foreach($orders as $order) {
         $new_data = [];
 
@@ -32,13 +44,30 @@ class BoardController extends Controller
           $new_data["delivery_time"] = "None";
         }
 
-        $new_data["status"] = $order["status"];
+        $new_data["status"] = 1;
+
+
         $new_data["packing_slip"] = "TODO";
-        $new_data["edit"] = '<a href="/orders/' . $order["number"]. '">Edit</a>';
 
         $data[] = $new_data;
       }
 
       return $data;
+    }
+
+    public function statuses() {
+      $statuses = [];
+
+      $statuses[] = [
+        "value" => 1,
+        "text" => "Processing"
+      ];
+
+      $statuses[] = [
+        "value" => 2,
+        "text" => "Completed"
+      ];
+
+      return $statuses;
     }
 }

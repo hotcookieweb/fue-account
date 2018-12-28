@@ -141,4 +141,9 @@ class OrderController extends Controller
         "ship_today" => $ship_today
       ]);
 	}
+
+  public function test(Request $request) {
+    var_dump($request->input());
+    exit;
+  }
 }
