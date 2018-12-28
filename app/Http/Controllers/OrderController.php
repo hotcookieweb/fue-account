@@ -91,7 +91,7 @@ class OrderController extends Controller
             $prepare_today[] = $order;
           } else {
             if ($delivery > $today) {
-              $upcoming[] = $order;
+              $upcoming[] = $order;    echo "hi";
             } else {
               $unknown[] = $order;
             }
@@ -121,7 +121,7 @@ class OrderController extends Controller
         }
       }
 
-
+    echo "hi";
       // TODO
       // sort prepare_today based on load and delivery times
 
@@ -142,8 +142,24 @@ class OrderController extends Controller
       ]);
 	}
 
-  public function test(Request $request) {
-    var_dump($request->input());
-    exit;
+  public function update(Request $request) {
+    if ($request->input("name") == "status") {
+
+      if ($request->input("value") == "1") {
+        $status = "processing";
+      } elseif ($request->input("value") == "2") {
+        $status = "completed";
+      }
+
+      $data = [
+        "status" => $status
+      ];
+
+      $number = $request->input("pk");
+
+      return Woocommerce::put("orders/$number", $data);
+    }
+
+    return "ok";
   }
 }

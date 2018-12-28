@@ -44,8 +44,11 @@ class BoardController extends Controller
           $new_data["delivery_time"] = "None";
         }
 
-        $new_data["status"] = 1;
-
+        if ($order['status'] == "processing") {
+          $new_data["status"] = 1;
+        } elseif ($order['status'] == "completed") {
+          $new_data["status"] = 2;
+        }
 
         $new_data["packing_slip"] = "TODO";
 

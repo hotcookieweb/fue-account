@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="container">
-		<table data-toggle="table" data-search="true" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/test">
+		<table data-toggle="table" data-search="true" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/data/board" data-id-field="number">
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="number" data-formatter="format_link">Order #</th>
@@ -22,5 +22,26 @@
 		function format_link(value, row, index, field) {
 			return '<a href="/orders/' + value + '">' + value + '</a>';
 		}
+
+		$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+		$.fn.editable({
+			url:'/data/board',
+			params: function(params){
+				params.pk = $(this).attr('data-pk');
+				return params;
+			},
+			success:function(response,value){
+				// Do success stuff.
+			}
+		});
+
+
+
 	</script>
+
 @endsection
