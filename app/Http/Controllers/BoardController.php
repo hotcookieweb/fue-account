@@ -36,7 +36,18 @@ class BoardController extends Controller
         $new_data["number"] = $order["number"];
         $new_data["created_at"] = $order["date_created"];
         $new_data["delivery_type"] = $delivery_type;
-        $new_data["prepare_by"] = "TODO";
+
+        foreach ($order['meta_data'] as $meta) {
+          if ($meta['key'] == "prepare_by") {
+            $new_data["prepare_by"] = $meta['value'];
+            \Log::info("TEST");
+          }
+        }
+
+        if (!isset($new_data["prepare_by"])) {
+          $new_data["prepare_by"] = "Type a new date.";
+        }
+
         $new_data["delivery_date"] = $order['meta_data'][0]['value'] ? $order['meta_data'][0]['value'] : "None";
 
         $new_data["delivery_time"] = $order['meta_data'][1]['value'] ? $order['meta_data'][1]['value'] : "None";

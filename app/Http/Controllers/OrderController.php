@@ -158,6 +158,20 @@ class OrderController extends Controller
       $number = $request->input("pk");
 
       return Woocommerce::put("orders/$number", $data);
+    } elseif ($request->input("name") == "prepare_by") {
+      \Log::info($request->input());
+      $data = [
+        "meta_data" => [
+          [
+            "key" => "prepare_by",
+            "value" => $request->input("value")
+          ]
+        ]
+      ];
+
+      $number = $request->input("pk");
+
+      return Woocommerce::put("orders/$number", $data);
     }
 
     return "ok";
