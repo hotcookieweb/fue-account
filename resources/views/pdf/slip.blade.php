@@ -1,5 +1,7 @@
 @extends('pdf.layout')
 
 @section('content')
-  testing
+  <div class="header">
+    <img class="logo" src="/logo.png">
+  </div>
 @endsection

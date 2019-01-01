@@ -28,4 +28,4 @@ Route::get('/data/statuses', 'BoardController@statuses');
 
 Route::get('/logout', 'HomeController@logout');
 
-Route::get('/pdf/{order_number}', 'PackingSlipController@download');
+Route::get('/pdf/{order_number}.pdf', 'PackingSlipController@download');
