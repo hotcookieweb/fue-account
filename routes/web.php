@@ -27,3 +27,5 @@ Route::post('/data/board', 'OrderController@update');
 Route::get('/data/statuses', 'BoardController@statuses');
 
 Route::get('/logout', 'HomeController@logout');
+
+Route::get('/pdf/{order_number}', 'PackingSlipController@download');
