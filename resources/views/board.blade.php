@@ -2,6 +2,7 @@
 
 @section('content')
 	<div class="container">
+		<a href="" style="font-size: 18px; color: white; background-color: #0808FF; padding: 5px; border-radius: 4px;">Refresh</a>
 		<table data-toggle="table" data-search="true" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/data/board" data-id-field="number">
 			<thead>
 				<tr>
