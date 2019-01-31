@@ -16,7 +16,7 @@
 
 
 
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.js"></script>
