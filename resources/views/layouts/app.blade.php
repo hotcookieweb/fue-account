@@ -46,6 +46,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               @if(Auth::check())
+                <li><a href="/manage/users">Manage Users</a></li>
                 <li><a href="/logout">Logout</a></li>
               @else
                 <li><a href="/login">Login</a></li>
