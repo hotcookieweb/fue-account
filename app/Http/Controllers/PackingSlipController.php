@@ -248,7 +248,37 @@ class PackingSlipController extends Controller
     return $pdf->Output('I');
   }
 
-  public function test() {
-    return view('receipt');
+  public function print($order_id) {
+    $order = Woocommerce::get("orders/$order_number");
+
+    $o = [];
+
+    $o["full_name"] = $order["shipping"]["first_name"] . " " . $order["shipping"]["last_name"];
+
+    $o["address_1"] = $order["shipping"]["address_1"];
+    $o["address_2"] = $order["shipping"]["address_2"];
+
+    $o["city"] = $order["shipping"]["city"];
+    $o["state"] = $order["shipping"]["state"];
+    $o["postcode"] = $order["shipping"]["postcode"];
+    $o["location"] = "$city, $state $postcode";
+
+    $o["country"]= $order["shipping"]["country"];
+    $o["email"] = $order["billing"]["email"];
+    $o["phone"] = $order["billing"]["phone"];
+
+    $o["order_number"] = $order_number;
+    $o["order_date"] = date("F j, Y", strtotime($order["date_created"]));
+
+    $o["shipping_method"] = $order["shipping_lines"][0]["method_title"];
+    $o["delivery_time"] = $order["meta_data"][1]["value"];
+
+    $o["items"] = $order["line_items"];
+
+    $url = env("PRINTER_URL");
+
+    return view("receipt")->with([
+      "order" => $o
+    ]);
   }
 }
