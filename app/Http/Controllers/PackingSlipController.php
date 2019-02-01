@@ -247,4 +247,8 @@ class PackingSlipController extends Controller
 
     return $pdf->Output('I');
   }
+
+  public function test() {
+    return view('receipt');
+  }
 }
