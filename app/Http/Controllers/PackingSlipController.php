@@ -261,6 +261,9 @@ class PackingSlipController extends Controller
     $o["city"] = $order["shipping"]["city"];
     $o["state"] = $order["shipping"]["state"];
     $o["postcode"] = $order["shipping"]["postcode"];
+    $city = $o["city"];
+    $state = $o["state"];
+    $postcode = $o["postcode"];
     $o["location"] = "$city, $state $postcode";
 
     $o["country"]= $order["shipping"]["country"];
