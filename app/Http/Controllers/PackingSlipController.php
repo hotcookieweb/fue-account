@@ -248,7 +248,7 @@ class PackingSlipController extends Controller
     return $pdf->Output('I');
   }
 
-  public function print($order_id) {
+  public function print($order_number) {
     $order = Woocommerce::get("orders/$order_number");
 
     $o = [];
