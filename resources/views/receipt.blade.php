@@ -88,7 +88,7 @@
       request += builder.createTextElement({data: 'Product\t\t\t\tQty\n'});
 
       @foreach($order["items"] as $item)
-        request += builder.createTextElement({data: '{{ $item["method_title"] }}\t\t\t\t{{ $item["quantity"] }}\n'});
+        request += builder.createTextElement({data: '{{ $item["name"] }}\t\t\t\t{{ $item["quantity"] }}\n'});
       @endforeach
 
       // CUT PAPER WE ARE DONE
