@@ -42,13 +42,17 @@
       request += builder.createTextElement({data: '{{ $order["full_name"] }}\n'});
 
       // Shipping Company if exists
-      request += builder.createTextElement({data: '{{ $order["company"] }}\n'});
+      @if(isset($order["company"]))
+        request += builder.createTextElement({data: '{{ $order["company"] }}\n'});
+      @endif
 
       // Shipping Address 1
       request += builder.createTextElement({data: '{{ $order["address_1"] }}\n'});
 
       // Shipping Address 2 if exists
-      request += builder.createTextElement({data: '{{ $order["address_2"] }}\n'});
+      @if(isset($order["address_2"]))
+        request += builder.createTextElement({data: '{{ $order["address_2"] }}\n'});
+      @endif
 
       // Shipping City, State Zipcode
       request += builder.createTextElement({data: '{{ $order["location"] }}\n'});
