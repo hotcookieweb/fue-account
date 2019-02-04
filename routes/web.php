@@ -29,6 +29,7 @@ Route::get('/data/statuses', 'BoardController@statuses');
 Route::get('/logout', 'HomeController@logout');
 
 Route::get('/pdf/{order_number}.pdf', 'PackingSlipController@download');
+Route::get('/receipt/{order_number}', 'PackingSlipController@print');
 // Route::get('/receipt/test', 'PackingSlipController@test');
 
 Route::get('/manage/users', 'ManageUserController@manage_users');
