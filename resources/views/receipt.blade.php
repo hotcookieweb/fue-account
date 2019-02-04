@@ -143,7 +143,7 @@
           trader.sendMessage({request: request});
       }
 
-      sendMessageAPI(url, request);
+      sendMessageApi(url, request);
 
     </script>
   </body>
