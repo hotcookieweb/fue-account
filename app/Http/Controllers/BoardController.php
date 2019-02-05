@@ -61,7 +61,7 @@ class BoardController extends Controller
           $new_data["status"] = 2;
         }
 
-        $new_data["packing_slip"] = "TODO";
+        $new_data["packing_slip"] = '<a href="/receipt/' . $new_data["number"] . '">Print</a>';
 
         $data[] = $new_data;
       }
