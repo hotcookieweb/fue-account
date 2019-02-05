@@ -40,9 +40,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href="/orders">Orders</a></li>
-              <li><a href="/board">Board</a></li>
+              <li><a href="/dashboard">Home</a></li>
+              {{-- <li><a href="/orders">Orders</a></li>
+              <li><a href="/board">Board</a></li> --}}
             </ul>
             <ul class="nav navbar-nav navbar-right">
               @if(Auth::check())

@@ -14,9 +14,10 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
-Route::get('/dashboard', 'HomeController@dashboard');
+// Route::get('/dashboard', 'HomeController@dashboard');
+Route::get('/dashboard', 'OrderController@board');
 
-Route::get('/board', 'OrderController@board');
+// Route::get('/board', 'OrderController@board');
 
 Route::get('/orders', 'OrderController@orders');
 Route::get('/orders/{id}', 'OrderController@order');
