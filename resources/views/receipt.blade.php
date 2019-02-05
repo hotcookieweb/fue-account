@@ -84,11 +84,13 @@
       // break
       request += builder.createTextElement({data: '\n'});
 
+      request += builder.createAlignmentElement({position: "left"});
+
       // method_title--quantity
-      request += builder.createTextElement({data: 'Product\t\t\t\tQty\n'});
+      request += builder.createTextElement({data: 'Quantity   -   Name\n'});
 
       @foreach($order["items"] as $item)
-        request += builder.createTextElement({data: '{{ $item["name"] }}\t\t\t\t{{ $item["quantity"] }}\n'});
+        request += builder.createTextElement({data: '{{ $item["quantity"] }}   -   {{ $item["name"] }}\n'});
       @endforeach
 
       // CUT PAPER WE ARE DONE
