@@ -13,7 +13,6 @@ class BoardController extends Controller
   		];
 
   		$orders = Woocommerce::get('orders', $params);
-
       $data = [];
 
       $statuses = [];
@@ -30,6 +29,10 @@ class BoardController extends Controller
 
       foreach($orders as $order) {
         $new_data = [];
+
+        if (count($order['shipping_lines']) == 0) {
+          continue;
+        }
 
         $delivery_type = $order['shipping_lines'][0]["method_title"];
 
