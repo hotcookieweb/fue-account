@@ -59,7 +59,7 @@ class BoardController extends Controller
             $new_data["delivery_time"] = "None";
           }
         } else {
-          $new_data["delivery_time"] = implode("-", $new_data["delivery_time"]);
+          $new_data["delivery_time"] = "None";
         }
 
         if ($order['status'] == "processing") {
