@@ -52,7 +52,7 @@ class BoardController extends Controller
         }
 
         $new_data["delivery_date"] = $order['meta_data'][0]['value'] ? $order['meta_data'][0]['value'] : "None";
-
+        return $new_data["delivery_time"];
         $new_data["delivery_time"] = $order['meta_data'][1]['value'] ? $order['meta_data'][1]['value'] : "None";
         if (explode(" ", $new_data["delivery_time"])[0] !== "Between") {
           $new_data["delivery_time"] = "None";
