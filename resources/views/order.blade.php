@@ -87,7 +87,26 @@
                                 $meta = "";
 
                                 foreach ($item["meta_data"] as $md) {
-                                  $meta = $meta . "<b>" . $md["key"] . "</b> - " . $md["value"] . "<br>";
+                                  if ($md["key"] == "pa_cookie-flavor") {
+                                    $key = "Cookie Flavor";
+                                  } else if ($md["key"] == "pa_chocolate-type") {
+                                    $key = "Chocolate Type";
+                                  } else if ($md["key"] == "pa_delivery-shipping-options") {
+                                    $key = "Delivery & Shipping Options";
+                                  } else if ($md["key"] == "pa_fabrication") {
+                                    $key = "Fabrication";
+                                  } else if ($md["key"] == "pa_features") {
+                                    $key = "Features";
+                                  } else if ($md["key"] == "pa_ingredients") {
+                                    $key = "Ingredients";
+                                  } else if ($md["key"] == "pa_size") {
+                                    $key = "Size";
+                                  } else if ($md["key"] == "pa_toppings") {
+                                    $key = "Toppings";
+                                  } else {
+                                    $key = $md["key"];
+                                  }
+                                  $meta = $meta . "<b>" . $key . "</b> - " . $md["value"] . "<br>";
                                 }
                               ?>
                               <td>
