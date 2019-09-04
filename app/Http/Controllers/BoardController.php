@@ -51,16 +51,19 @@ class BoardController extends Controller
           $new_data["prepare_by"] = "Type a new date.";
         }
 
-        $new_data["delivery_date"] = $order['meta_data'][0]['value'] ? $order['meta_data'][0]['value'] : "None";
-        $new_data["delivery_time"] = $order['meta_data'][1]['value'] ? $order['meta_data'][1]['value'] : "None";
-
-        if (!is_array($new_data["delivery_time"])) {
-          if (explode(" ", $new_data["delivery_time"])[0] !== "Between") {
-            $new_data["delivery_time"] = "None";
+        foreach ($order['meta_data'] as $md) {
+          if ($md["key"] == "Delivery Date") {
+            $new_data["delivery_date"] = $md["value"];
           }
-        } else {
-          $new_data["delivery_time"] = "None";
+
+          if ($md["key"] == "Delivery Time") {
+            $new_data["delivery_time"] = $md["value"];
+          }
         }
+
+        // if (substr($new_data["delivery_time"], 0, 4) == "ccof") {
+        //   $new_data["delivery_time"] = "None";
+        // }
 
         if ($order['status'] == "processing") {
           $new_data["status"] = 1;

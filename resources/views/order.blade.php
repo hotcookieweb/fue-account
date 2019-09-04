@@ -14,8 +14,23 @@
 
                       <br>
 
-                      <b>Delivery Date</b>: ({{ $order['meta_data'][0]['value'] }})<br>
-                      <b>Delivery Time</b>: ({{ $order['meta_data'][1]['value'] }})<br>
+                      <?php
+                      $delivery_date = "None";
+                      $delivery_time = "None";
+
+                      foreach ($order['meta_data'] as $md) {
+                        if ($md["key"] == "Delivery Date") {
+                          $delivery_date = $md["value"];
+                        }
+
+                        if ($md["key"] == "Delivery Time") {
+                          $delivery_time = $md["value"];
+                        }
+                      }
+                      ?>
+
+                      <b>Delivery Date</b>: {{ $delivery_date }}<br>
+                      <b>Delivery Time</b>: {{ $delivery_time }}<br>
 
                       <br>
 
@@ -68,7 +83,17 @@
                           @foreach($order['line_items'] as $i=>$item)
                             <tr>
                               <th scope="row">{{ $i+1 }}</th>
-                              <td>{{ $item['name'] }}</td>
+                              <?php
+                                $meta = "";
+
+                                foreach ($item["meta_data"] as $md) {
+                                  $meta = $meta . "<b>" . $md["key"] . "</b> - " . $md["value"] . "<br>";
+                                }
+                              ?>
+                              <td>
+                                {{ $item["name"] }}<br>
+                                {!! $meta !!}
+                              </td>
                               <td>${{ $item['price'] }}</td>
                               <td>{{ $item['quantity'] }}</td>
                               <td>${{ $item['total'] }}</td>
