@@ -37,7 +37,7 @@ class BoardController extends Controller
         $delivery_type = $order['shipping_lines'][0]["method_title"];
 
         $new_data["number"] = $order["number"];
-        $new_data["created_at"] = $order["date_created"];
+        $new_data["created_at"] = \Carbon\Carbon::parse($order["date_created"])->toDayDateTimeString();
         $new_data["delivery_type"] = $delivery_type;
 
         foreach ($order['meta_data'] as $meta) {
