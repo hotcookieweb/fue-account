@@ -151,7 +151,7 @@
       sendMessageApi(url, request);
 
       setTimeout(function() {
-        window.location.hash = "/";
+        window.location.href = "/";
       }, 5000)
 
     </script>
