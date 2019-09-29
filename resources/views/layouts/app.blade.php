@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
 
 
     <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
