@@ -66,9 +66,9 @@ class BoardController extends Controller
         // }
 
         if ($order['status'] == "processing") {
-          $new_data["status"] = 1;
+          $new_data["status"] = "Processing";
         } elseif ($order['status'] == "completed") {
-          $new_data["status"] = 2;
+          $new_data["status"] = "Completed";
         }
 
         $new_data["packing_slip"] = '<a href="/receipt/' . $new_data["number"] . '">Print</a>';
