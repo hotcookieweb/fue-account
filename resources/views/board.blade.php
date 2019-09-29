@@ -45,22 +45,29 @@
 		current_total_rows = -1;
 
 		setInterval(function() {
-			current_total_rows = $('#table').bootstrapTable('getData').length;
+			current_total_rows = total_rows;
+			console.log("current total rows:", current_total_rows);
 
 			$("#table").bootstrapTable('refresh');
-		}, 60000)
+		}, 20000)
 
 		$("#table").on('load-success.bs.table', function() {
 			total_rows = $('#table').bootstrapTable('getData').length;
+			console.log("total rows:", total_rows);
 
 			if (current_total_rows != -1) {
 				if (current_total_rows < total_rows) {
 					document.getElementById('new_order_alert').play();
 
-					var uri = $($('#table').bootstrapTable('getData')[0]["packing_slip"]).attr('href');
-					window.location.href = uri;
+					var uri = $($('#table').bootstrapTable('getData')[0].packing_slip).attr('href');
 
 					console.log("A new order has just came in.");
+
+					setTimeout(function() {
+						window.location.href = uri;
+					}, 1000);
+				} else {
+					console.log('same')
 				}
 			}
 		})
