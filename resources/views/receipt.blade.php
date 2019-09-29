@@ -78,6 +78,9 @@
       // Shipping Method: <>
       request += builder.createTextElement({data: '{{ $order["shipping_method"] }}\n'});
 
+      // Delivery Date: Between <>
+      request += builder.createTextElement({data: '{{ $order["delivery_date"] }}\n'});
+
       // Delivery Time: Between <>
       request += builder.createTextElement({data: '{{ $order["delivery_time"] }}\n'});
 

@@ -12,12 +12,11 @@ class OrderController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+  public function __construct() {
+    $this->middleware('auth');
+  }
 
-    public function orders() {
+  public function orders() {
 		$params = [
 			'per_page' => 10,
 			'page' => 1
@@ -58,8 +57,17 @@ class OrderController extends Controller
 
     foreach ($orders as $order) {
       $_delivery_method = $order['shipping_lines'][0]['method_id'];
-      $_delivery_date = $order['meta_data'][0]['value'];
-      $_delivery_time = $order['meta_data'][1]['value'];
+
+      foreach ($order['meta_data'] as $md) {
+        if ($md["key"] == "Delivery or Pickup Date") {
+          $_delivery_date = $md["value"];
+
+        }
+
+        if ($md["key"] == "Time Slot") {
+          $_delivery_time = $md["value"];
+        }
+      }
 
       // check if delivery date is valid
       $_valid_delivery_date = strtotime($_delivery_date) ? true : false;
