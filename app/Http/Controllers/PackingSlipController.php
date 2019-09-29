@@ -280,11 +280,11 @@ class PackingSlipController extends Controller
 
     $url = env("PRINTER_URL");
 
-    return redirect("/");
+    return redirect()->back();
 
-    return view("receipt")->with([
-      "order" => $o,
-      "url" => $url
-    ]);
+    // return view("receipt")->with([
+    //   "order" => $o,
+    //   "url" => $url
+    // ]);
   }
 }
