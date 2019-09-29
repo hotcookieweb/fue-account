@@ -133,8 +133,6 @@
       //      msg += 'ResponseText : [ ' + response.responseText + ' ]\n';
 
               console.log(msg);
-
-              window.location.hash = "/";
           }
 
           trader.onError = function(response) {
@@ -151,6 +149,10 @@
       }
 
       sendMessageApi(url, request);
+
+      setTimeout(function() {
+        window.location.hash = "/";
+      }, 5000)
 
     </script>
   </body>
