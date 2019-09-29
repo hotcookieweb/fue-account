@@ -12,12 +12,11 @@ class OrderController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+  public function __construct() {
+    $this->middleware('auth');
+  }
 
-    public function orders() {
+  public function orders() {
 		$params = [
 			'per_page' => 10,
 			'page' => 1

@@ -52,11 +52,11 @@ class BoardController extends Controller
         }
 
         foreach ($order['meta_data'] as $md) {
-          if ($md["key"] == "Delivery Date") {
+          if ($md["key"] == "Delivery or Pickup Date") {
             $new_data["delivery_date"] = $md["value"];
           }
 
-          if ($md["key"] == "Delivery Time") {
+          if ($md["key"] == "Time Slot") {
             $new_data["delivery_time"] = $md["value"];
           }
         }

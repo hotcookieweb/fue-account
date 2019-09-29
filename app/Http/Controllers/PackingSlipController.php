@@ -274,13 +274,22 @@ class PackingSlipController extends Controller
     $o["order_date"] = date("F j, Y", strtotime($order["date_created"]));
 
     $o["shipping_method"] = $order["shipping_lines"][0]["method_title"];
-    $o["delivery_time"] = $order["meta_data"][1]["value"];
+    foreach ($order['meta_data'] as $md) {
+      if ($md["key"] == "Delivery or Pickup Date") {
+        $o["delivery_date"] = $md["value"];
+
+      }
+
+      if ($md["key"] == "Time Slot") {
+        $o["delivery_time"] = $md["value"];
+      }
+    }
 
     $o["items"] = $order["line_items"];
 
     $url = env("PRINTER_URL");
 
-    return redirect("/");
+//    return redirect("/");
 
     return view("receipt")->with([
       "order" => $o,
