@@ -56,9 +56,11 @@
 			if (current_total_rows != -1) {
 				if (current_total_rows < total_rows) {
 					document.getElementById('new_order_alert').play();
+
+					var uri = $($('#table').bootstrapTable('getData')[0]["packing_slip"]).attr('href');
+					window.location.href = uri;
+
 					console.log("A new order has just came in.");
-				} else {
-					console.log("Same");
 				}
 			}
 		})
