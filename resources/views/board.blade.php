@@ -32,16 +32,19 @@
         }
     });
 
-		// $.fn.editable({
-		// 	url:'/data/board',
-		// 	params: function(params){
-		// 		params.pk = $(this).attr('data-pk');
-		// 		return params;
-		// 	},
-		// 	success:function(response,value){
-		// 		console.log("test");
-		// 	}
-		// });
+		$.fn.editable.defaults.mode = 'inline';
+
+		$.fn.editable({
+			url:'/data/board',
+			params: function(params){
+				params.pk = $(this).attr('data-pk');
+				return params;
+			},
+			success:function(response,value){
+				console.log("test");
+			}
+		});
+
 		current_total_rows = -1;
 
 		setInterval(function() {
@@ -49,7 +52,7 @@
 			console.log("current total rows:", current_total_rows);
 
 			$("#table").bootstrapTable('refresh');
-		}, 20000)
+		}, 60000)
 
 		$("#table").on('load-success.bs.table', function() {
 			total_rows = $('#table').bootstrapTable('getData').length;
@@ -65,7 +68,7 @@
 
 					setTimeout(function() {
 						window.location.href = uri;
-					}, 60000);
+					}, 5000);
 				} else {
 					console.log('same')
 				}
