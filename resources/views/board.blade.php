@@ -65,7 +65,7 @@
 
 					setTimeout(function() {
 						window.location.href = uri;
-					}, 1000);
+					}, 60000);
 				} else {
 					console.log('same')
 				}
