@@ -32,8 +32,6 @@
         }
     });
 
-		$.fn.editable.defaults.mode = 'inline';
-
 		$.fn.editable({
 			url:'/data/board',
 			params: function(params){
