@@ -12,8 +12,9 @@
 					<th data-sortable="true" data-field="created_at">Created On</th>
 					<th data-sortable="true" data-field="delivery_type">Delivery Type</th>
 					<th data-sortable="true" data-editable="true" data-field="prepare_by" data-editable-field="status">Prepare By</th>
-					<th data-sortable="true" data-field="delivery_date">Delivery Date</th>
-					<th data-sortable="true" data-field="delivery_time">Delivery Time</th>
+					<th data-sortable="true" data-field="ready_type">Ready Type</th>
+					<th data-sortable="true" data-field="ready_date">Ready Date</th>
+					<th data-sortable="true" data-field="ready_time">Ready Time</th>
 					<th data-editable-type="select" data-editable="true" data-field="status" data-editable-field="status" data-editable-source="/data/statuses">Status</th>
 					<th data-field="packing_slip">Packing Slip</th>
 				</tr>
