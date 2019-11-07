@@ -29,6 +29,7 @@ class BoardController extends Controller
       ];
 
       foreach($orders as $order) {
+        return $order;
         $new_data = [];
 
         if (count($order['shipping_lines']) == 0) {
