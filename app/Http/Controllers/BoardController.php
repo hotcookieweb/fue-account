@@ -54,7 +54,7 @@ class BoardController extends Controller
         }
 
         foreach ($order['meta_data'] as $md) {
-          if ($md["key"] == "Ready Date") {
+          if ($md["key"] == "ready_date") {
             $new_data["ready_date"] = $md["value"];
           }
 
