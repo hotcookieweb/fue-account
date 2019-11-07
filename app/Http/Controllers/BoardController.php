@@ -41,26 +41,26 @@ class BoardController extends Controller
         $new_data["created_at"] = \Carbon\Carbon::parse($order["date_created"])->toDayDateTimeString();
         $new_data["delivery_type"] = $delivery_type;
 
-        foreach ($order['meta_data'] as $meta) {
-          if ($meta['key'] == "prepare_by") {
-            $new_data["prepare_by"] = $meta['value'];
-            \Log::info("TEST");
-          }
-        }
+        // foreach ($order['meta_data'] as $meta) {
+        //   if ($meta['key'] == "prepare_by") {
+        //     $new_data["prepare_by"] = $meta['value'];
+        //     \Log::info("TEST");
+        //   }
+        // }
 
         if (!isset($new_data["prepare_by"])) {
           $new_data["prepare_by"] = "Type a new date.";
         }
 
-        foreach ($order['meta_data'] as $md) {
-          if ($md["key"] == "Delivery or Pickup Date") {
-            $new_data["delivery_date"] = $md["value"];
-          }
-
-          if ($md["key"] == "Time Slot") {
-            $new_data["delivery_time"] = $md["value"];
-          }
-        }
+        // foreach ($order['meta_data'] as $md) {
+        //   if ($md["key"] == "Delivery or Pickup Date") {
+        //     $new_data["delivery_date"] = $md["value"];
+        //   }
+        //
+        //   if ($md["key"] == "Time Slot") {
+        //     $new_data["delivery_time"] = $md["value"];
+        //   }
+        // }
 
         // if (substr($new_data["delivery_time"], 0, 4) == "ccof") {
         //   $new_data["delivery_time"] = "None";
