@@ -79,10 +79,10 @@
       request += builder.createTextElement({data: '{{ $order["shipping_method"] }}\n'});
 
       // Delivery Date: Between <>
-      request += builder.createTextElement({data: '{{ $order["delivery_date"] }}\n'});
+      request += builder.createTextElement({data: '{{ $order["ready_date"] }}\n'});
 
       // Delivery Time: Between <>
-      request += builder.createTextElement({data: '{{ $order["delivery_time"] }}\n'});
+      request += builder.createTextElement({data: '{{ $order["ready_time"] }}\n'});
 
       // break
       request += builder.createTextElement({data: '\n'});
