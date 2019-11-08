@@ -19,18 +19,18 @@
                       $delivery_time = "None";
 
                       foreach ($order['meta_data'] as $md) {
-                        if ($md["key"] == "Delivery or Pickup Date") {
+                        if ($md["key"] == "ready_date") {
                           $delivery_date = $md["value"];
                         }
 
-                        if ($md["key"] == "Time Slot") {
+                        if ($md["key"] == "ready_time") {
                           $delivery_time = $md["value"];
                         }
                       }
                       ?>
 
-                      <b>Delivery Date</b>: {{ $delivery_date }}<br>
-                      <b>Delivery Time</b>: {{ $delivery_time }}<br>
+                      <b>Ready Date</b>: {{ $delivery_date }}<br>
+                      <b>Ready Time</b>: {{ $delivery_time }}<br>
 
                       <br>
 
