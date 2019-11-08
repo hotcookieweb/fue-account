@@ -276,8 +276,8 @@ class PackingSlipController extends Controller
     $o["shipping_method"] = $order["shipping_lines"][0]["method_title"];
 
 
-    $o["delivery_date"] = "None";
-    $o["delivery_time"] = "None";
+    $o["ready_date"] = "None";
+    $o["ready_time"] = "None";
     foreach ($order['meta_data'] as $md) {
       if ($md["key"] == "ready_date") {
         $o["ready_date"] = $md["value"];
