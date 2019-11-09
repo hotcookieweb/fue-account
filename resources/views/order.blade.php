@@ -126,12 +126,10 @@
 
                       <br>
 
-                      <h3>Customer Note</h3>
-                        @if($order['customer_note'])
-                          <p>{{ $order['customer_note'] }}</p>
-                        @else
-                          <p>The customer did not leave a note.</p>
-                        @endif
+                      @if($order['customer_note'])
+                        <h3>Customer Note</h3>
+                        <p>{{ $order['customer_note'] }}</p>
+                      @endif
                     @endif
                   </p>
                 </div>

@@ -12,8 +12,9 @@ public function print($order_number) {
   $url = env("PRINTER_URL");
 
   return view("receipt")->with([
-    "order_number" => $order_number
+    "order_number" => $order_number,
     "order" => $order,
-    "url" => $url
+    "url" => $url,
   ]);
 }
+?>
