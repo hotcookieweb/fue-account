@@ -15,22 +15,19 @@
                       <br>
 
                       <?php
-                      $delivery_date = "None";
-                      $delivery_time = "None";
-
                       foreach ($order['meta_data'] as $md) {
                         if ($md["key"] == "ready_date") {
-                          $delivery_date = $md["value"];
+                          ?>
+                          <b>Ready Date</b>: {{ $md["value"] }}<br>
+                          <?php
                         }
-
                         if ($md["key"] == "ready_time") {
-                          $delivery_time = $md["value"];
+                          ?>
+                          <b>Ready Time</b>: {{ $md["value"] }}<br>
+                          <?php
                         }
                       }
                       ?>
-
-                      <b>Ready Date</b>: {{ $delivery_date }}<br>
-                      <b>Ready Time</b>: {{ $delivery_time }}<br>
 
                       <br>
 
@@ -85,7 +82,6 @@
                               <th scope="row">{{ $i+1 }}</th>
                               <?php
                                 $meta = "";
-
                                 foreach ($item["meta_data"] as $md) {
                                   if ($md["key"] == "pa_cookie-flavor") {
                                     $key = "Cookie Flavor";
@@ -101,8 +97,8 @@
                                     $key = "Ingredients";
                                   } else if ($md["key"] == "pa_size") {
                                     $key = "Size";
-                                  } else if ($md["key"] == "pa_toppings") {
-                                    $key = "Toppings";
+                                  } else if ($md["key"] == "pa_toppers") {
+                                    $key = "Sexy Toppers";
                                   } else {
                                     $key = $md["key"];
                                   }
