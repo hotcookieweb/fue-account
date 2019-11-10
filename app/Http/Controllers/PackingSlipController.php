@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Codedge\Fpdf\Fpdf\Fpdf;
 use Woocommerce;
 
 public function print($order_number) {
@@ -14,7 +13,7 @@ public function print($order_number) {
   return view("receipt")->with([
     "order_number" => $order_number,
     "order" => $order,
-    "url" => $url,
+    "url" => $url
   ]);
 }
 ?>
