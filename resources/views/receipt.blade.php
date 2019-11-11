@@ -20,12 +20,12 @@
       // Information about HotCookie
       request += builder.createAlignmentElement({position: "center"});
 
-      // Top Logo
+      // Top Logo - pre-download into printer with star setup utility windows only
       request += builder.createLogoElement({number: 1});
 
       // Packing Slip
       request += builder.createTextElement({emphasis: true});
-      request += builder.createTextElement({data: 'Packing Slip\n'});
+      request += builder.createTextElement({data: '\nPacking Slip\n'});
       request += builder.createTextElement({emphasis: false});
 
       // Shipping Full Name
@@ -62,7 +62,7 @@
 
       // Order Number: <>
       request += builder.createTextElement({emphasis: true});
-      request += builder.createTextElement({data: '{{ $order_number }}\n'});
+      request += builder.createTextElement({data: 'Order Number: {{ $order_number }}\n'});
       request += builder.createTextElement({emphasis: false});
 
       @php
@@ -93,12 +93,12 @@
 
       // method_title--quantity
       request += builder.createTextElement({emphasis: true});
-      request += builder.createTextElement({data: 'QuantityProduct\n'});
+      request += builder.createTextElement({data: '#    Product\n'});
       request += builder.createTextElement({emphasis: false});
 
       var key
       @foreach($order["line_items"] as $item)
-        request += builder.createTextElement({data: '{{ $item["quantity"] }}   -   {{ $item["name"] }}\n'});
+        request += builder.createTextElement({data: '{{ $item["quantity"] }}    {{ $item["name"] }}\n'});
         @foreach ($item["meta_data"] as $md)
           @switch ($md["key"])
             @case ("pa_cookie-flavor")
@@ -133,12 +133,15 @@
         @endforeach
       @endforeach
 
-      request += builder.createTextElement({emphasis: true});
-      request += builder.createTextElement({data: 'Customer Note:\n'});
-      request += builder.createTextElement({emphasis: false});
-      request += builder.createTextElement({data: '{{ $order['customer_note']}}\n'});
+      @if ($order['customer_note'])
+        request += builder.createTextElement({emphasis: true});
+        request += builder.createTextElement({data: '\nCustomer Note:\n'});
+        request += builder.createTextElement({emphasis: false});
+        request += builder.createTextElement({data: '{{ $order['customer_note']}}\n'});
+      @endif
 
-      // HotCookie slogan
+      // HotCookie slogan - pre-downloaded into printer with setup utility
+      request += builder.createTextElement({data: '\n'});
       request += builder.createLogoElement({number: 2});
 
       // FEED and CUT PAPER WE ARE DONE
