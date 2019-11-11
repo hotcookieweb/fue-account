@@ -15,7 +15,7 @@
 
       request += builder.createInitializationElement();
 
-      request += builder.createTextElement({characterspace: 2});
+      request += builder.createTextElement({characterspace: 2, codepage: 'utf8'});
 
       // Information about HotCookie
       request += builder.createAlignmentElement({position: "center"});
@@ -95,49 +95,29 @@
       request += builder.createTextElement({emphasis: true});
       request += builder.createTextElement({data: '#    Product\n'});
       request += builder.createTextElement({emphasis: false});
+      request += builder.createRuledLineElement();
 
-      var key
       @foreach($order["line_items"] as $item)
         request += builder.createTextElement({data: '{{ $item["quantity"] }}    {{ $item["name"] }}\n'});
         @foreach ($item["meta_data"] as $md)
-          @switch ($md["key"])
-            @case ("pa_cookie-flavor")
-              key = "Cookie Flavor";
-              @break
-            @case("pa_chocolate-type")
-              key = "Chocolate Type";
-              @break
-            @case("pa_delivery-shipping-options")
-              key = "Delivery & Shipping Options";
-              @break
-            @case("pa_fabrication")
-              key = "Fabrication";
-              @break
-            @case("pa_features")
-              key = "Features";
-              @break
-            @case("pa_ingredients")
-              key = "Ingredients";
-              @break
-            @case("pa_size")
-              key = "Size";
-              @break
-            @case("pa_toppers")
-              key = "Sexy Toppers";
-              @break
-            @default
-              key = $md["key"];
-              @break
-          @endswitch
-          request += builder.createTextElement({data: ' ' + key + ': {{ $md["value"] }}\n'});
+          @php
+          $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
+          @endphp
+          request += builder.createTextElement({font: 'font_b'});
+          request += builder.createTextElement({data: ' {{ $key }}: {{ $md["value"] }}\n'});
+          request += builder.createTextElement({font: 'font_a'});
         @endforeach
       @endforeach
+      request += builder.createRuledLineElement({thickness:'double_thin'});
 
       @if ($order['customer_note'])
         request += builder.createTextElement({emphasis: true});
         request += builder.createTextElement({data: '\nCustomer Note:\n'});
         request += builder.createTextElement({emphasis: false});
-        request += builder.createTextElement({data: '{{ $order['customer_note']}}\n'});
+        request += builder.createTextElement({font: 'font_b'});
+        request += builder.createTextElement({data: '{{ $order['customer_note']}}\n\n'});
+        request += builder.createTextElement({font: 'font_a'});
+        request += builder.createRuledLineElement({thickness:'double_thin'});
       @endif
 
       // HotCookie slogan - pre-downloaded into printer with setup utility
