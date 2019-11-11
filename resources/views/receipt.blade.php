@@ -96,39 +96,40 @@
       request += builder.createTextElement({data: 'QuantityProduct\n'});
       request += builder.createTextElement({emphasis: false});
 
-      @foreach($order["items"] as $item)
+      var key
+      @foreach($order["line_items"] as $item)
         request += builder.createTextElement({data: '{{ $item["quantity"] }}   -   {{ $item["name"] }}\n'});
         @foreach ($item["meta_data"] as $md)
           @switch ($md["key"])
             @case ("pa_cookie-flavor")
-              $key = "Cookie Flavor";
+              key = "Cookie Flavor";
               @break
             @case("pa_chocolate-type")
-              $key = "Chocolate Type";
+              key = "Chocolate Type";
               @break
             @case("pa_delivery-shipping-options")
-              $key = "Delivery & Shipping Options";
+              key = "Delivery & Shipping Options";
               @break
             @case("pa_fabrication")
-              $key = "Fabrication";
+              key = "Fabrication";
               @break
             @case("pa_features")
-              $key = "Features";
+              key = "Features";
               @break
             @case("pa_ingredients")
-              $key = "Ingredients";
+              key = "Ingredients";
               @break
             @case("pa_size")
-              $key = "Size";
+              key = "Size";
               @break
             @case("pa_toppers")
-              $key = "Sexy Toppers";
+              key = "Sexy Toppers";
               @break
             @default
-              $key = $md["key"];
+              key = $md["key"];
               @break
           @endswitch
-          request += builder.createTextElement({data: ' {{ $key }}: {{ $md["value"] }}\n'});
+          request += builder.createTextElement({data: ' ' + key + ': {{ $md["value"] }}\n'});
         @endforeach
       @endforeach
 
@@ -136,12 +137,12 @@
       request += builder.createTextElement({data: 'Customer Note:\n'});
       request += builder.createTextElement({emphasis: false});
       request += builder.createTextElement({data: '{{ $order['customer_note']}}\n'});
-      // HotCookie
-      // Top Logo
+
+      // HotCookie slogan
       request += builder.createLogoElement({number: 2});
 
       // FEED and CUT PAPER WE ARE DONE
-      request += builder.createFeedElement(2);
+  //    request += builder.createFeedElement(2);
       request += builder.createCutPaperElement({feed:true});
 
       var url = "{{ $url }}";
