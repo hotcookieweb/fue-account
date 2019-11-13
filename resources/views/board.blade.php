@@ -4,8 +4,8 @@
 	<audio id="new_order_alert" src="/new_order_alert.wav" preload="auto"></audio>
 
 	<div class="container">
-		<a href="" style="font-size: 18px; color: white; background-color: #0808FF; padding: 5px; border-radius: 4px;">Refresh</a>
-		<table id="table" data-sort-name="ready_date" data-sort-order="asc" data-toggle="table" data-search="true" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/data/board" data-id-field="number">
+		{{-- <a href="" style="font-size: 18px; color: white; background-color: #0808FF; padding: 5px; border-radius: 4px;">Refresh</a> --}}
+		<table id="table" data-sort-name="ready_date" data-sort-order="asc" data-toggle="table" data-search="false" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/data/board" data-id-field="number">
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="number" data-formatter="format_link">Order #</th>
