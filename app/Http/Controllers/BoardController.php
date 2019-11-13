@@ -49,10 +49,6 @@ class BoardController extends Controller
           }
         }
 
-        if (!isset($new_data["ready_type"])) {
-          $new_data["ready_type"] = "???";
-        }
-
         foreach ($order['meta_data'] as $md) {
           if ($md["key"] == "ready_date") {
             $new_data["ready_date"] = $md["value"];
@@ -60,6 +56,9 @@ class BoardController extends Controller
 
           if ($md["key"] == "ready_time") {
             $new_data["ready_time"] = $md["value"];
+          }
+          else {
+            $new_data["ready_time"] = "";
           }
         }
 
