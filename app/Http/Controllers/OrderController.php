@@ -56,24 +56,24 @@ class OrderController extends Controller
     // hotcookie_delivery (USPS Priority medium)
 
     foreach ($orders as $order) {
-      $_delivery_method = $order['shipping_lines'][0]['method_id'];
+      $_ready_type = $order['ready_type'];
 
       foreach ($order['meta_data'] as $md) {
-        if ($md["key"] == "Delivery or Pickup Date") {
-          $_delivery_date = $md["value"];
+        if ($md["key"] == "ready_date") {
+          $_ready_date = $md["value"];
 
         }
 
-        if ($md["key"] == "Time Slot") {
-          $_delivery_time = $md["value"];
+        if ($md["key"] == "ready_time") {
+          $_ready_time = $md["value"];
         }
       }
 
       // check if delivery date is valid
-      $_valid_delivery_date = strtotime($_delivery_date) ? true : false;
+      $_valid_ready_date = strtotime($_ready_date) ? true : false;
 
       // check if delivery_time is valid
-      $_valid_delivery_time = strlen($_delivery_time) > 6 ? true : false;
+      $_valid_ready_time = strlen($_ready_time) > 6 ? true : false;
 
       $today = date("m/d/Y");
       $prepare_by = "???";
@@ -91,10 +91,10 @@ class OrderController extends Controller
       // and will be put in prepare_today if the delivery date is the same as today. Otherwise, if the
       // delivery date is next day or more, put in upcoming. If the delivery date is past, put it in
       // unknown.
-      if ($_delivery_method == "free_shipping") {
-        if ($_valid_delivery_date) {
+      if ($_ready_type == "free_shipping") {
+        if ($_valid_ready_date) {
           // if today
-          $delivery = date("m/d/Y", strtotime($_delivery_date));
+          $delivery = date("m/d/Y", strtotime($_ready_date));
           if ($today == $delivery) {
             $prepare_today[] = $order;
           } else {

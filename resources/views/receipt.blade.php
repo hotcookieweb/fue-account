@@ -15,31 +15,21 @@
 
       request += builder.createInitializationElement();
 
-      request += builder.createTextElement({characterspace: 2});
+      request += builder.createTextElement({characterspace: 2, codepage: 'utf8'});
 
       // Information about HotCookie
       request += builder.createAlignmentElement({position: "center"});
 
-      // Top Logo
+      // Top Logo - pre-download into printer with star setup utility windows only
       request += builder.createLogoElement({number: 1});
-
-      // HotCookie
-      request += builder.createTextElement({emphasis: true});
-      request += builder.createTextElement({data: '\nHotCookie\n'});
-      request += builder.createTextElement({emphasis: false});
-
-      // Company Address
-      request += builder.createTextElement({data: '407 Castro St\n'});
-      request += builder.createTextElement({data: 'San Francisco, CA 94114\n\n'});
-
 
       // Packing Slip
       request += builder.createTextElement({emphasis: true});
-      request += builder.createTextElement({data: 'Packing Slip\n'});
+      request += builder.createTextElement({data: '\nPacking Slip\n'});
       request += builder.createTextElement({emphasis: false});
 
       // Shipping Full Name
-      request += builder.createTextElement({data: '{{ $order["full_name"] }}\n'});
+      request += builder.createTextElement({data: '{{ $order["shipping"]["first_name"]  }} {{ $order["shipping"]["last_name"] }}\n'});
 
       // Shipping Company if exists
       @if(isset($order["company"]))
@@ -47,42 +37,54 @@
       @endif
 
       // Shipping Address 1
-      request += builder.createTextElement({data: '{{ $order["address_1"] }}\n'});
+      request += builder.createTextElement({data: '{{ $order["shipping"]["address_1"] }}\n'});
 
       // Shipping Address 2 if exists
-      @if(isset($order["address_2"]))
-        request += builder.createTextElement({data: '{{ $order["address_2"] }}\n'});
+      @if(isset($order["shipping"]["address_2"]))
+        request += builder.createTextElement({data: '{{ $order["shipping"]["address_2"] }}\n'});
       @endif
 
-      // Shipping City, State Zipcode
-      request += builder.createTextElement({data: '{{ $order["location"] }}\n'});
+      // Shipping City, State Zipcode, Country
+      request += builder.createTextElement({data: '{{ $order["shipping"]["city"] }}, {{ $order["shipping"]["state"] }} {{ $order["shipping"]["postcode"] }} {{ $order["shipping"]["country"] }}\n\n'});
 
-      // Shipping Country
-      request += builder.createTextElement({data: '{{ $order["country"] }}\n'});
 
+      // Contact Info
+      request += builder.createTextElement({emphasis: true});
+      request += builder.createTextElement({data: 'Contact Info\n'});
+      request += builder.createTextElement({emphasis: false});
       // Shipping Email if exists
-      request += builder.createTextElement({data: '{{ $order["email"] }}\n'});
-
+      request += builder.createTextElement({data: '{{ $order["billing"]["email"] }}\n'});
       // Shipping Phone Number
-      request += builder.createTextElement({data: '{{ $order["phone"] }}\n'});
+      request += builder.createTextElement({data: '{{ $order["billing"]["phone"] }}\n'});
 
       // break
       request += builder.createTextElement({data: '\n'});
 
       // Order Number: <>
-      request += builder.createTextElement({data: '{{ $order["order_number"] }}\n'});
+      request += builder.createTextElement({emphasis: true});
+      request += builder.createTextElement({data: 'Order Number: {{ $order_number }}\n'});
+      request += builder.createTextElement({emphasis: false});
+
+      @php
+      $order_date = date("F j, Y", strtotime($order["date_created"]));
+      @endphp
 
       // Order Date: Month <day>, <year>
-      request += builder.createTextElement({data: '{{ $order["order_date"] }}\n'});
+      request += builder.createTextElement({data: '{{ $order_date }}\n'});
 
-      // Shipping Method: <>
-      request += builder.createTextElement({data: '{{ $order["shipping_method"] }}\n'});
+      // Shipping Method:
+      request += builder.createTextElement({data: '{{ $order["shipping_lines"][0]["method_title"] }}\n'});
 
-      // Delivery Date: Between <>
-      request += builder.createTextElement({data: '{{ $order["ready_date"] }}\n'});
-
-      // Delivery Time: Between <>
-      request += builder.createTextElement({data: '{{ $order["ready_time"] }}\n'});
+      @foreach ($order['meta_data'] as $md)
+        @if ($md["key"] == "ready_date")
+          // Delivery Date: Between <>
+          request += builder.createTextElement({data: '{{ $md["value"] }}\n'});
+        @endif
+        @if ($md["key"] == "ready_time")
+          // Delivery Time: Between <>
+          request += builder.createTextElement({data: '{{ $md["value"] }}\n'});
+        @endif
+      @endforeach
 
       // break
       request += builder.createTextElement({data: '\n'});
@@ -90,13 +92,40 @@
       request += builder.createAlignmentElement({position: "left"});
 
       // method_title--quantity
-      request += builder.createTextElement({data: 'Quantity   -   Name\n'});
+      request += builder.createTextElement({emphasis: true});
+      request += builder.createTextElement({data: '#    Product\n'});
+      request += builder.createTextElement({emphasis: false});
+      request += builder.createRuledLineElement();
 
-      @foreach($order["items"] as $item)
-        request += builder.createTextElement({data: '{{ $item["quantity"] }}   -   {{ $item["name"] }}\n'});
+      @foreach($order["line_items"] as $item)
+        request += builder.createTextElement({data: '{{ $item["quantity"] }}    {{ $item["name"] }}\n'});
+        @foreach ($item["meta_data"] as $md)
+          @php
+          $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
+          @endphp
+          request += builder.createTextElement({font: 'font_b'});
+          request += builder.createTextElement({data: ' {{ $key }}: {{ $md["value"] }}\n'});
+          request += builder.createTextElement({font: 'font_a'});
+        @endforeach
       @endforeach
+      request += builder.createRuledLineElement({thickness:'double_thin'});
 
-      // CUT PAPER WE ARE DONE
+      @if ($order['customer_note'])
+        request += builder.createTextElement({emphasis: true});
+        request += builder.createTextElement({data: '\nCustomer Note:\n'});
+        request += builder.createTextElement({emphasis: false});
+        request += builder.createTextElement({font: 'font_b'});
+        request += builder.createTextElement({data: '{{ $order['customer_note']}}\n\n'});
+        request += builder.createTextElement({font: 'font_a'});
+        request += builder.createRuledLineElement({thickness:'double_thin'});
+      @endif
+
+      // HotCookie slogan - pre-downloaded into printer with setup utility
+      request += builder.createTextElement({data: '\n'});
+      request += builder.createLogoElement({number: 2});
+
+      // FEED and CUT PAPER WE ARE DONE
+  //    request += builder.createFeedElement(2);
       request += builder.createCutPaperElement({feed:true});
 
       var url = "{{ $url }}";
