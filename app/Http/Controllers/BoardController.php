@@ -10,8 +10,7 @@ class BoardController extends Controller
     public function board() {
       $params = [
   			'status' => 'processing',
-        'per_page' => 100,
-        'orderby' => 'ready_date'
+        'per_page' => 100
   		];
 
   		$orders = Woocommerce::get('orders', $params);
