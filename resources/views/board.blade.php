@@ -11,7 +11,9 @@
 					<th data-sortable="true" data-field="number" data-formatter="format_link">Order #</th>
 					<th data-sortable="true" data-field="created_at">Created On</th>
 					<th data-sortable="true" data-field="delivery_type">Delivery Type</th>
+<!---
 					<th data-sortable="true" data-editable="true" data-field="prepare_by" data-editable-field="status">Prepare By</th>
+---->
 					<th data-sortable="true" data-field="ready_date">Ready Date</th>
 					<th data-sortable="true" data-field="ready_time">Ready Time</th>
 					<th data-editable-type="select" data-editable="true" data-field="status" data-editable-field="status" data-editable-source="/data/statuses">Status</th>
@@ -60,7 +62,7 @@
 				if (current_total_rows < total_rows) {
 					document.getElementById('new_order_alert').play();
 
-					var uri = $($('#table').bootstrapTable('getData')[0].packing_slip).attr('href');
+//					var uri = $($('#table').bootstrapTable('getData')[0].packing_slip).attr('href');
 
 					console.log("A new order has just came in.");
 
