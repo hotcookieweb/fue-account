@@ -3,14 +3,14 @@
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">Order #: {{ $order['number'] }}</h4>
           </div>
           <div class="card-body">
-            Date created: {{ date("F d, Y", strtotime($order['date_created'])) }}<br>
-            Order status: {{ $order['status'] }}<br>
+            Created: {{ date("F d, Y", strtotime($order['date_created'])) }}<br>
+            Status: {{ $order['status'] }}<br>
             {{ $order['shipping_lines']['0']['method_title'] }}: {{ $order['shipping_lines']['0']['total']}}<br>
             @foreach ($order['meta_data'] as $md)
               @if ($md["key"] == "ready_date")
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">Billing Address</h4>
@@ -35,12 +35,12 @@
               {{ $order['billing']['address_2'] }}<br>
             @endif
             {{ $order['billing']['city'] }}, {{ $order['billing']['state'] }} {{ $order['billing']['postcode'] }} {{ $order['billing']['country'] }}<br>
-            Phone # {{ $order['billing']['phone'] }}<br>
-            Email - <i>{{ $order['billing']['email'] }}</i><br>
+            {{ $order['billing']['phone'] }}<br>
+            <i>{{ $order['billing']['email'] }}</i><br>
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">Shipping Address</h4>
