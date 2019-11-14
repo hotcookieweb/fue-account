@@ -41,14 +41,9 @@ class BoardController extends Controller
         $new_data["created_at"] = \Carbon\Carbon::parse($order["date_created"])->toDayDateTimeString();
         $new_data["delivery_type"] = $delivery_type;
 
-        // Ready Type, Ready Date, Ready Time
-
-        foreach ($order['meta_data'] as $meta) {
-          if ($meta['key'] == "ready_type") {
-            $new_data["ready_type"] = $meta['value'];
-          }
-        }
-
+        // Ready Date, Ready Time
+        $new_data["ready_date"] = "";
+        $new_data["ready_time"] = "";
         foreach ($order['meta_data'] as $md) {
           if ($md["key"] == "ready_date") {
             $new_data["ready_date"] = $md["value"];
@@ -56,9 +51,6 @@ class BoardController extends Controller
 
           if ($md["key"] == "ready_time") {
             $new_data["ready_time"] = $md["value"];
-          }
-          else {
-            $new_data["ready_time"] = "";
           }
         }
 
