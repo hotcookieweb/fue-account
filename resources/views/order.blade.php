@@ -30,6 +30,8 @@
           </div>
           <div class="card-body">
             {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}<br>
+            @if ($order ['billing']['company'])
+              {{ $order ['billing']['company'] }}<br>
             {{ $order['billing']['address_1'] }}<br>
             @if($order['billing']['address_2'])
               {{ $order['billing']['address_2'] }}<br>
@@ -47,6 +49,8 @@
           </div>
           <div class="card-body">
             {{ $order['shipping']['first_name'] }} {{ $order['shipping']['last_name'] }}<br>
+            @if ($order ['shipping']['company'])
+              {{ $order ['shipping']['company'] }}<br>
             {{ $order['shipping']['address_1'] }}<br>
             @if($order['shipping']['address_2'])
               {{ $order['shipping']['address_2'] }}<br>

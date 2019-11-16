@@ -32,8 +32,8 @@
       request += builder.createTextElement({data: '{{ $order["shipping"]["first_name"]  }} {{ $order["shipping"]["last_name"] }}\n'});
 
       // Shipping Company if exists
-      @if(isset($order["company"]))
-        request += builder.createTextElement({data: '{{ $order["company"] }}\n'});
+      @if(isset($order["shipping"]["company"]))
+        request += builder.createTextElement({data: '{{ $order["shipping"]["company"] }}\n'});
       @endif
 
       // Shipping Address 1
