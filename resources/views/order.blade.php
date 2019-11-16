@@ -32,6 +32,7 @@
             {{ $order['billing']['first_name'] }} {{ $order['billing']['last_name'] }}<br>
             @if ($order ['billing']['company'])
               {{ $order ['billing']['company'] }}<br>
+            @endif
             {{ $order['billing']['address_1'] }}<br>
             @if($order['billing']['address_2'])
               {{ $order['billing']['address_2'] }}<br>
@@ -51,6 +52,7 @@
             {{ $order['shipping']['first_name'] }} {{ $order['shipping']['last_name'] }}<br>
             @if ($order ['shipping']['company'])
               {{ $order ['shipping']['company'] }}<br>
+            @endif
             {{ $order['shipping']['address_1'] }}<br>
             @if($order['shipping']['address_2'])
               {{ $order['shipping']['address_2'] }}<br>
