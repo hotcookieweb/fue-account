@@ -58,54 +58,64 @@
               {{ $order['shipping']['address_2'] }}<br>
             @endif
             {{ $order['shipping']['city'] }}, {{ $order['shipping']['state'] }} {{ $order['shipping']['postcode'] }} {{ $order['shipping']['country'] }}<br>
+            @foreach ($order['meta_data'] as $md)
+              @if ($md["key"] == "_shipping_phone")
+                {{ $md["value"] }}<br>
+                @break
+              @endif
+            @endforeach
           </div>
         </div>
       </div>
     </div>
     <div class="row justify-content-left">
-      <div class="card-header">
-        <h4 class="card-title">Items</h4>
-      </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Qty</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($order['line_items'] as $i=>$item)
-            <tr>
-              <th scope="row">{{ $i+1 }}</th>
-              <td>
-                {{ $item["name"] }}<br>
-                @foreach ($item["meta_data"] as $md)
-                  @php
-                  $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
-                  @endphp
-                  {{ $key }}: {{ $md["value"] }}<br>
-                @endforeach
-              </td>
-              <td>${{ $item['price'] }}</td>
-              <td>{{ $item['quantity'] }}</td>
-              <td>${{ $item['total'] }}</td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
-    <div class="row justify-content-left">
-      @if($order['customer_note'])
+      <div class="row justify-content-left">
         <div class="card-header">
-          <h4 class="card-title">Customer Note:</h4>
+          <h4 class="card-title">Items</h4>
         </div>
         <div class="card-body">
-          {{ $order['customer_note'] }}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($order['line_items'] as $i=>$item)
+                <tr>
+                  <th scope="row">{{ $i+1 }}</th>
+                  <td>
+                    {{ $item["name"] }}<br>
+                    @foreach ($item["meta_data"] as $md)
+                      @php
+                      $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
+                      @endphp
+                      {{ $key }}: {{ $md["value"] }}<br>
+                    @endforeach
+                  </td>
+                  <td>${{ $item['price'] }}</td>
+                  <td>{{ $item['quantity'] }}</td>
+                  <td>${{ $item['total'] }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
-      @endif
+        <div class="row justify-content-left">
+          @if($order['customer_note'])
+            <div class="card-header">
+              <h4 class="card-title">Customer Note:</h4>
+            </div>
+            <div class="card-body">
+              {{ $order['customer_note'] }}
+            </div>
+          @endif
+        </div>
+      </div>
     </div>
   </div>
 </div>

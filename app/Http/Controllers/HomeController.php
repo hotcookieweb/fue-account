@@ -18,24 +18,6 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function dashboard()
-    {
-        $completed = count(Woocommerce::get('orders', ['status' => 'completed']));
-        $processing = count(Woocommerce::get('orders', ['status' => 'processing']));
-        $all = $processing + $completed;
-
-        return view('dashboard')->with([
-          "all" => $all,
-          "completed" => $completed,
-          "processing" => $processing
-        ]);
-    }
-
   	public function board()
   	{
   		  return view('board');

@@ -32,7 +32,7 @@
       request += builder.createTextElement({data: '{{ $order["shipping"]["first_name"]  }} {{ $order["shipping"]["last_name"] }}\n'});
 
       // Shipping Company if exists
-      @if(isset($order["shipping"]["company"]))
+      @if($order["shipping"]["company"])
         request += builder.createTextElement({data: '{{ $order["shipping"]["company"] }}\n'});
       @endif
 
@@ -40,17 +40,23 @@
       request += builder.createTextElement({data: '{{ $order["shipping"]["address_1"] }}\n'});
 
       // Shipping Address 2 if exists
-      @if(isset($order["shipping"]["address_2"]))
+      @if($order["shipping"]["address_2"])
         request += builder.createTextElement({data: '{{ $order["shipping"]["address_2"] }}\n'});
       @endif
 
       // Shipping City, State Zipcode, Country
-      request += builder.createTextElement({data: '{{ $order["shipping"]["city"] }}, {{ $order["shipping"]["state"] }} {{ $order["shipping"]["postcode"] }} {{ $order["shipping"]["country"] }}\n\n'});
-
+      request += builder.createTextElement({data: '{{ $order["shipping"]["city"] }}, {{ $order["shipping"]["state"] }} {{ $order["shipping"]["postcode"] }} {{ $order["shipping"]["country"] }}\n'});
+      // Shipping Address 2 if exists
+      @foreach ($order['meta_data'] as $md)
+        @if ($md["key"] == "_shipping_phone")
+          request += builder.createTextElement({data: '{{ $md["value"] }}\n'});
+          @break
+        @endif
+      @endforeach
 
       // Contact Info
       request += builder.createTextElement({emphasis: true});
-      request += builder.createTextElement({data: 'Contact Info\n'});
+      request += builder.createTextElement({data: '\nCustomer Contact Info\n'});
       request += builder.createTextElement({emphasis: false});
       // Shipping Email if exists
       request += builder.createTextElement({data: '{{ $order["billing"]["email"] }}\n'});
