@@ -1,25 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
 	<audio id="new_order_alert" src="/new_order_alert.wav" preload="auto"></audio>
 
 	<div class="container">
 		{{-- <a href="" style="font-size: 18px; color: white; background-color: #0808FF; padding: 5px; border-radius: 4px;">Refresh</a> --}}
-		<table id="table" data-sort-name="ready_sort" data-sort-order="asc" data-toggle="table" data-search="false" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/data/board" data-id-field="number">
+		<table id="table" data-sort-name="ready_date" data-sort-order="asc" data-toggle="table" data-search="false" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/data/board" data-id-field="number">
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="number" data-formatter="format_link">Order #</th>
 					<th data-sortable="true" data-field="created_at">Created On</th>
 					<th data-sortable="true" data-field="delivery_type">Delivery Type</th>
-<!---
-					<th data-sortable="true" data-editable="true" data-field="prepare_by" data-editable-field="status">Prepare By</th>
----->
-					<th data-sortable="true" data-field="ready_date">Ready Date</th>  <!-- should search on ready_sort column -->
-					<th data-sortable="true" data-field="ready_time">Ready Time</th>  <!-- should search on ready_sort column -->
+					<th data-sortable="true" data-field="ready_date">Ready Date</th>  <!-- should search on ready_sort data -->
+					<th data-sortable="true" data-field="ready_time">Ready Time</th>  <!-- should search on ready_sort data -->
 					<th data-editable-type="select" data-editable="true" data-field="status" data-editable-field="status" data-editable-source="/data/statuses">Status</th>
 					<th data-field="packing_slip">Packing Slip</th>
-					<th data-sortable="true" data-field="ready_sort" style="visable:false">Sort</th>  <!-- should be hidden -->
-				</tr>
 			</thead>
 		</table>
 	</div>

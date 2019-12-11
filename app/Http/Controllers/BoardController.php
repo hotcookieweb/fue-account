@@ -42,27 +42,24 @@ class BoardController extends Controller
         $new_data["delivery_type"] = $delivery_type;
 
         // Ready Date, Ready Time
-        $new_data["ready_date"] = "";
-        $new_data["ready_time"] = "";
+        $ready_date = "";
+        $ready_time = "";
+        $ready_sort = "";
         foreach ($order['meta_data'] as $md) {
           if ($md["key"] == "ready_date") {
-            $new_data["ready_date"] = $md["value"];
+            $ready_date = $md["value"];
           }
 
           if ($md["key"] == "ready_time") {
-            $new_data["ready_time"] = $md["value"];
+            $ready_time = $md["value"];
           }
 
           if ($md["key"] == "ready_sort") {
-            $new_data["ready_sort"] = $md["value"];
+            $ready_sort = $md["value"];
           }
-
-
         }
-
-        // if (substr($new_data["delivery_time"], 0, 4) == "ccof") {
-        //   $new_data["delivery_time"] = "None";
-        // }
+        $new_data["ready_date"] = '<span style="display:none">' . $ready_sort . '</span>' . $ready_date;
+        $new_data["ready_time"] = '<span style="display:none">' . $ready_sort . '</span>' . $ready_time;
 
         if ($order['status'] == "processing") {
           $new_data["status"] = 1;
