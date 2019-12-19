@@ -110,7 +110,12 @@
           $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
           @endphp
           request += builder.createTextElement({font: 'font_b'});
-          request += builder.createTextElement({data: ' {{ $key }}: {{ $md["value"] }}\n'});
+          @php
+          // filter any newlines customer may have added.
+            $mdval = htmlspecialchars_decode($md["value"]);
+            $mdval = preg_replace('/\r\n|\r|\n/','\\\n',$mdval);
+          @endphp
+          request += builder.createTextElement({data: ' {{ $key }}: {{ $mdval }}\n'});
           request += builder.createTextElement({font: 'font_a'});
         @endforeach
       @endforeach
@@ -121,7 +126,12 @@
         request += builder.createTextElement({data: '\nCustomer Note:\n'});
         request += builder.createTextElement({emphasis: false});
         request += builder.createTextElement({font: 'font_b'});
-        request += builder.createTextElement({data: '{{ $order['customer_note']}}\n\n'});
+        @php
+        // filter any newlines customer may have added.
+          $customer_note = htmlspecialchars_decode($order['customer_note']);
+          $customer_note = preg_replace('/\r\n|\r|\n/','\\\n',$customer_note);
+        @endphp
+        request += builder.createTextElement({data: '{{ $customer_note }}\n\n'});
         request += builder.createTextElement({font: 'font_a'});
         request += builder.createRuledLineElement({thickness:'double_thin'});
       @endif

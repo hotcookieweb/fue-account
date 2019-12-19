@@ -92,9 +92,11 @@
                     {{ $item["name"] }}<br>
                     @foreach ($item["meta_data"] as $md)
                       @php
-                      $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
+                        $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
+                        $mdval = htmlspecialchars_decode($md["value"]);
+                        $mdval = htmlspecialchars_decode($mdval);
                       @endphp
-                      {{ $key }}: {{ $md["value"] }}<br>
+                      {{ $key }}: {{ $mdval }} <br>
                     @endforeach
                   </td>
                   <td>${{ $item['price'] }}</td>
