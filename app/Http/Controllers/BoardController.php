@@ -14,6 +14,14 @@ class BoardController extends Controller
   		];
 
   		$orders = Woocommerce::get('orders', $params);
+      $zones = unserialize(auth()->user()->zones);
+      if (in_array ('other', $zones)) {
+        $other = true;
+      }
+      else {
+        $other = false;
+      }
+
       $data = [];
 
       $statuses = [];
@@ -31,21 +39,16 @@ class BoardController extends Controller
       foreach($orders as $order) {
         $new_data = [];
 
-        if (count($order['shipping_lines']) == 0) {
-          continue;
-        }
-
-        $delivery_type = $order['shipping_lines'][0]["method_title"];
-
-        $new_data["number"] = $order["number"];
-        $new_data["created_at"] = \Carbon\Carbon::parse($order["date_created"])->toDateTimeString();
-        $new_data["delivery_type"] = $delivery_type;
-
-        // Ready Date, Ready Time
+        $shipping_zone = "";
         $ready_date = "";
         $ready_time = "";
         $ready_sort = "";
+        $ready_type = "";
+
         foreach ($order['meta_data'] as $md) {
+          if ($md["key"] == "shipping_zone") {
+            $shipping_zone = $md["value"];
+          }
           if ($md["key"] == "ready_date") {
             $ready_date = $md["value"];
           }
@@ -57,7 +60,28 @@ class BoardController extends Controller
           if ($md["key"] == "ready_sort") {
             $ready_sort = $md["value"];
           }
+          if ($md["key"] == "ready_type") {
+            $ready_type = $md["value"];
+          }
         }
+
+        if (!in_array ( $shipping_zone, $zones )) {
+          if (in_array($shipping_zone, ["national", "castro-sf", "polk-sf"]))
+            continue;
+          if ($other == false)
+            continue;
+        }
+
+        $new_data["number"] = $order["number"];
+        $new_data["shipping_zone"] = $shipping_zone;
+
+        if (count($order['shipping_lines']) != 0) {
+          $new_data["delivery_type"] = $order['shipping_lines'][0]["method_title"];
+        }
+        else {
+          $new_data["delivery_type"] = $ready_type;
+        }
+
         $new_data["ready_date"] = '<span style="display:none">' . $ready_sort . '</span>' . $ready_date;
         $new_data["ready_time"] = '<span style="display:none">' . $ready_sort . '</span>' . $ready_time;
 
@@ -68,8 +92,6 @@ class BoardController extends Controller
         }
 
         $new_data["packing_slip"] = '<a href="/receipt/' . $new_data["number"] . '">Print</a>';
-
-
 
         $data[] = $new_data;
       }

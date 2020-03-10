@@ -43,8 +43,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="/dashboard">Home</a></li>
-              {{-- <li><a href="/orders">Orders</a></li>
-              <li><a href="/board">Board</a></li> --}}
+              <li><a href="/manage/zones">Zones</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               @if(Auth::check())
@@ -70,11 +69,8 @@
           <li class="nav-item active">
             <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/orders">Orders</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/board">Board</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="/manage/zones">Zones <span class="sr-only">(current)</span></a>
           </li>
         </ul>
         {{-- <form class="form-inline my-2 my-md-0">

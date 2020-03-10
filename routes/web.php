@@ -17,8 +17,6 @@ Route::get('/', 'HomeController@index');
 // Route::get('/dashboard', 'HomeController@dashboard');
 Route::get('/dashboard', 'OrderController@board');
 
-// Route::get('/board', 'OrderController@board');
-
 Route::get('/orders', 'OrderController@orders');
 Route::get('/orders/{id}', 'OrderController@order');
 
@@ -32,5 +30,8 @@ Route::get('/logout', 'HomeController@logout');
 Route::get('/receipt/{order_number}', 'PackingSlipController@print');
 
 Route::get('/manage/users', 'ManageUserController@manage_users');
-Route::get('/manage/users/delete/{id}', 'ManageUserController@delete');
+Route::get('/manage/zones', 'ManageUserController@manage_zones');
+Route::post('/manage/users/delete', 'ManageUserController@delete');
 Route::post('/manage/users/create', 'ManageUserController@create');
+Route::post('/manage/users/passreset', 'ManageUserController@passreset');
+Route::post('/manage/users/update_zones', 'ManageUserController@update_zones');

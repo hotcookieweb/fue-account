@@ -11,8 +11,14 @@
           <div class="card-body">
             Created: {{ date("F d, Y", strtotime($order['date_created'])) }}<br>
             Status: {{ $order['status'] }}<br>
-            {{ $order['shipping_lines']['0']['method_title'] }}: {{ $order['shipping_lines']['0']['total']}}<br>
+            @if(!empty($order["shipping_lines"]))
+              {{ $order['shipping_lines']['0']['method_title'] }}: {{ $order['shipping_lines']['0']['total']}}<br>
+            @endif
+
             @foreach ($order['meta_data'] as $md)
+              @if ($md["key"] == "ready_type")
+                Ready type: {{ $md["value"] }}<br>
+              @endif
               @if ($md["key"] == "ready_date")
                 Ready date: {{ $md["value"] }}<br>
               @endif

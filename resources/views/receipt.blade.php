@@ -79,7 +79,9 @@
       request += builder.createTextElement({data: '{{ $order_date }}\n'});
 
       // Shipping Method:
-      request += builder.createTextElement({data: '{{ $order["shipping_lines"][0]["method_title"] }}\n'});
+      @if(!empty($order["shipping_lines"]))
+        request += builder.createTextElement({data: '{{ $order["shipping_lines"][0]["method_title"] }}\n'});
+      @endif
 
       @foreach ($order['meta_data'] as $md)
         @if ($md["key"] == "ready_date")
