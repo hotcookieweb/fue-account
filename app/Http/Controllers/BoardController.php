@@ -104,7 +104,6 @@ class BoardController extends Controller
           $new_data["class"] = "table-light";
         }
         else {
-          $new_data["ready_time"] = $now;
           $new_data["class"] = "table-dark";
         }
 
