@@ -1,13 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-
-	<audio id="new_order_alert" src="/new_order_alert.wav" preload="auto"></audio>
+	<audio autoplay id="new_order_alert" src="/new_order_alert.wav" preload="auto" >
+		The browser does not support the <code>audio</code> element.
+	</audio>
 
 	<div class="container">
 		{{-- <a href="" style="font-size: 18px; color: white; background-color: #0808FF; padding: 5px; border-radius: 4px;">Refresh</a> --}}
-		<table id="table" data-sort-name="ready_date" data-sort-order="asc" data-toggle="table" data-search="false" data-url="/data/board" data-editable-emptytext="..." data-editable-url="/data/board" data-id-field="number">
-			<thead>
+		<table id="table"
+			data-sort-name="ready_date"
+			data-sort-order="asc"
+			data-toggle="table"
+			data-search="false"
+			data-url="/data/board"
+			data-editable-emptytext="..."
+			data-editable-url="/data/board"
+			data-id-field="number"
+			data-row-style="row_style">
+			<thead class="thead-dark">
 				<tr>
 					<th data-sortable="true" data-field="number" data-formatter="format_link">Order #</th>
 					<th data-sortable="true" data-field="shipping_zone">Ship Zone</th>
@@ -21,6 +31,11 @@
 	</div>
 
 	<script>
+		function row_style(row, index) {
+			return {
+				classes: row["class"]
+			}
+		}
 		function format_link(value, row, index, field) {
 			return '<a href="/orders/' + value + '">' + value + '</a>';
 		}

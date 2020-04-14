@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -28,36 +30,6 @@
 
 </head>
 <body>
-
-  <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">{{ config('app.name') }}</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="/dashboard">Home</a></li>
-              <li><a href="/manage/zones">Zones</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              @if(Auth::check())
-                <li><a href="/manage/users">Manage Users</a></li>
-                <li><a href="/logout">Logout</a></li>
-              @else
-                <li><a href="/login">Login</a></li>
-              @endif
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </nav>
-
-
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a class="navbar-brand" href="/">{{ config('app.name') }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">

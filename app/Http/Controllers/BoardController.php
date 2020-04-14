@@ -13,7 +13,8 @@ class BoardController extends Controller
         'per_page' => 100
   		];
 
-  		$orders = Woocommerce::get('orders', $params);
+ 		$orders = Woocommerce::get('orders', $params);
+
       $zones = unserialize(auth()->user()->zones);
       if (in_array ('other', $zones)) {
         $other = true;
@@ -35,6 +36,9 @@ class BoardController extends Controller
         "value" => "completed",
         "text" => "Completed"
       ];
+
+      $now = time()-7*3600;
+      $today = date('m/d/Y', $now);
 
       foreach($orders as $order) {
         $new_data = [];
@@ -92,6 +96,17 @@ class BoardController extends Controller
         }
 
         $new_data["packing_slip"] = '<a href="/receipt/' . $new_data["number"] . '">Print</a>';
+
+        if ($ready_sort <= $now) {
+          $new_data["class"] = "table-danger";
+        }
+        else if ($ready_date == $today) {
+          $new_data["class"] = "table-light";
+        }
+        else {
+          $new_data["ready_time"] = $now;
+          $new_data["class"] = "table-dark";
+        }
 
         $data[] = $new_data;
       }
