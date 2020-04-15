@@ -24,7 +24,7 @@
 					<th data-sortable="true" data-field="delivery_type">Delivery Type</th>
 					<th data-sortable="true" data-field="ready_date">Ready Date</th>  <!-- should search on ready_sort data -->
 					<th data-sortable="true" data-field="ready_time">Ready Time</th>  <!-- should search on ready_sort data -->
-					<th data-editable-type="select" data-editable="true" data-field="status" data-editable-field="status" data-editable-source="/data/statuses">Status</th>
+					<th data-editable-type="select" data-editable="true" data-field="status" data-editable-field="status" data-editable-source="/data/statuses" class="mdb-select md-form">Status</th>
 					<th data-field="packing_slip">Packing Slip</th>
 			</thead>
 		</table>

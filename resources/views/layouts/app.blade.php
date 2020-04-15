@@ -10,23 +10,20 @@
 
     <title>{{ config('app.name', 'Hot Cookie Kitchen') }}</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.css">
     <link rel="stylesheet" href="/css/app.css">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+
 
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/apple-touch-icon.png">
 
     <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <script src="/js/bootstrap-table-editable.js"></script>
-
 
 </head>
 <body>
@@ -44,21 +41,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="/manage/zones">Zones <span class="sr-only">(current)</span></a>
           </li>
-        </ul>
-        {{-- <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form> --}}
-        <ul class="navbar-nav ml-auto">
           @if(Auth::check())
             <li class="nav-item">
-              <form class="form-inline" action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button class="nav-link" style="background: none; border: none;" type="submit">Logout</button>
-              </form>
-            </li>
-          @else
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link active" href="/logout">Logout <span class="sr-only">(current)</span></a>
             </li>
           @endif
         </ul>
