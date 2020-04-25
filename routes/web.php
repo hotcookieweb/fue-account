@@ -21,13 +21,13 @@ Route::get('/orders', 'OrderController@orders');
 Route::get('/orders/{id}', 'OrderController@order');
 
 Route::get('/data/board', 'BoardController@board');
-Route::post('/data/board', 'OrderController@update');
+Route::post('/data/board', 'BoardController@update');
 
 Route::get('/data/statuses', 'BoardController@statuses');
 
 Route::get('/logout', 'HomeController@logout');
 
-Route::get('/receipt/{order_number}', 'PackingSlipController@print');
+Route::get('/receipt/{status}/{order_number}', 'PackingSlipController@print');
 
 Route::get('/manage/users', 'ManageUserController@manage_users');
 Route::get('/manage/zones', 'ManageUserController@manage_zones');

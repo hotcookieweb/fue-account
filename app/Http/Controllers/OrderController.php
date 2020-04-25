@@ -25,39 +25,4 @@ class OrderController extends Controller
   public function board() {
     return view('board');
   }
-
-  public function update(Request $request) {
-    if ($request->input("name") == "status") {
-
-      if ($request->input("value") == "1") {
-        $status = "processing";
-      } elseif ($request->input("value") == "2") {
-        $status = "completed";
-      }
-
-      $data = [
-        "status" => $status
-      ];
-
-      $number = $request->input("pk");
-
-      return Woocommerce::put("orders/$number", $data);
-    } elseif ($request->input("name") == "prepare_by") {
-      \Log::info($request->input());
-      $data = [
-        "meta_data" => [
-          [
-            "key" => "prepare_by",
-            "value" => $request->input("value")
-          ]
-        ]
-      ];
-
-      $number = $request->input("pk");
-
-      return Woocommerce::put("orders/$number", $data);
-    }
-
-    return "ok";
-  }
 }

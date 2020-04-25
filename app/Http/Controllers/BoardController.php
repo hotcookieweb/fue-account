@@ -9,7 +9,7 @@ class BoardController extends Controller
 {
     public function board() {
       $params = [
-  			'status' => 'processing',
+  			'status' => array ('processing','printed'),
         'per_page' => 100
   		];
 
@@ -24,18 +24,6 @@ class BoardController extends Controller
       }
 
       $data = [];
-
-      $statuses = [];
-
-      $statuses[] = [
-        "value" => "processing",
-        "text" => "Processing"
-      ];
-
-      $statuses[] = [
-        "value" => "completed",
-        "text" => "Completed"
-      ];
 
       $now = time()-7*3600;
       $today = date('m/d/Y', $now);
@@ -91,19 +79,22 @@ class BoardController extends Controller
 
         if ($order['status'] == "processing") {
           $new_data["status"] = 1;
-        } elseif ($order['status'] == "completed") {
+          $new_data["class"] = "table-light";
+
+        } elseif ($order['status'] == "printed") {
           $new_data["status"] = 2;
+          $new_data["class"] = "table-primary";
+        } else {
+          $new_data["status"] = 3;
+          $new_data["class"] = "table-secondary";
         }
 
-        $new_data["packing_slip"] = '<a href="/receipt/' . $new_data["number"] . '">Print</a>';
+        $new_data["packing_slip"] = '<a href="/receipt/' . $order['status'] . '/' . $order['number'] . '">Print</a>';
 
         if ($ready_sort <= $now) {
           $new_data["class"] = "table-danger";
         }
-        else if ($ready_date == $today) {
-          $new_data["class"] = "table-light";
-        }
-        else {
+        else if ($ready_date != $today) {
           $new_data["class"] = "table-dark";
         }
 
@@ -123,9 +114,51 @@ class BoardController extends Controller
 
       $statuses[] = [
         "value" => 2,
+        "text" => "Printed"
+      ];
+
+      $statuses[] = [
+        "value" => 3,
         "text" => "Completed"
       ];
 
       return $statuses;
+    }
+
+    public function update(Request $request) {
+      if ($request->input("name") == "status") {
+
+        if ($request->input("value") == "1") {
+          $status = "processing";
+        } elseif ($request->input("value") == "2") {
+          $status = "printed";
+        } elseif ($request->input("value") == "3") {
+          $status = "completed";
+        }
+
+        $data = [
+          "status" => $status
+        ];
+
+        $number = $request->input("pk");
+
+        return Woocommerce::put("orders/$number", $data);
+      } elseif ($request->input("name") == "prepare_by") {
+        \Log::info($request->input());
+        $data = [
+          "meta_data" => [
+            [
+              "key" => "prepare_by",
+              "value" => $request->input("value")
+            ]
+          ]
+        ];
+
+        $number = $request->input("pk");
+
+        return Woocommerce::put("orders/$number", $data);
+      }
+
+      return "ok";
     }
 }
