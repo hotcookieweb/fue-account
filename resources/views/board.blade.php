@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-	<audio autoplay id="new_order_alert" src="/new_order_alert.wav" preload="auto" >
-		The browser does not support the <code>audio</code> element.
-	</audio>
-
 	<div class="container">
 		{{-- <a href="" style="font-size: 18px; color: white; background-color: #0808FF; padding: 5px; border-radius: 4px;">Refresh</a> --}}
 		<table id="table"
@@ -52,9 +48,16 @@
 				params.pk = $(this).attr('data-pk');
 				return params;
 			},
-			success:function(response,value){
-				console.log("test");
-			}
+			success:function(response,newvalue){
+				return newvalue;
+			},
+			error: function(response, newValue) {
+    		if(response.status === 500) {
+        	return 'Service unavailable. Please try later.';
+    		} else {
+        	return response.responseText;
+    		}
+			},
 		});
 
 		current_total_rows = -1;
@@ -72,21 +75,33 @@
 
 			if (current_total_rows != -1) {
 				if (current_total_rows < total_rows) {
-					document.getElementById('new_order_alert').play();
-
-//					var uri = $($('#table').bootstrapTable('getData')[0].packing_slip).attr('href');
-
+					new_order_alert.play();
 					console.log("A new order has just came in.");
-
-					setTimeout(function() {
-						window.location.href = uri;
-					}, 5000);
 				} else {
 					console.log('same')
 				}
 			}
 		})
 
+		var isUnlocked = false;
+		function unlock() {
+
+			if(isIOS || this.unlocked)
+				return;
+
+			// create empty buffer and play it
+			var source = "/new_order_alert.wav";
+			source.buffer = buffer;
+			source.connect(myContext.destination);
+			source.noteOn(0);
+
+			// by checking the play state after some time, we know if we're really unlocked
+			setTimeout(function() {
+				if((source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE)) {
+					isUnlocked = true;
+				}
+			}, 0);
+		}
 	</script>
 
 @endsection

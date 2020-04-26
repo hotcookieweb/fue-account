@@ -24,7 +24,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <script src="/js/bootstrap-table-editable.js"></script>
-
 </head>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -35,17 +34,30 @@
 
       <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+          <li class="nav-item active" style="padding-left: 20px">
             <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active" style="padding-left: 20px">
             <a class="nav-link" href="/manage/zones">Zones <span class="sr-only">(current)</span></a>
           </li>
           @if(Auth::check())
-            <li class="nav-item">
+            <li class="nav-item" style="padding-left: 20px">
               <a class="nav-link active" href="/logout">Logout <span class="sr-only">(current)</span></a>
             </li>
           @endif
+          <li class="nav" style="padding-left: 20px;">
+            <input id="turn-on-audio" class="nav-button" type="button" style="background-color: #f44336; color: white" value="Turn order alert on" onclick="play_order_alert()">
+            <script>
+              const new_order_alert = new Audio("/new_order_alert.wav")
+              function play_order_alert() {
+                new_order_alert.play();
+                var onbutton = document.getElementById("turn-on-audio");
+                onbutton.value="Order alert on"
+                onbutton.style.backgroundColor="#e7e7e7"
+                onbutton.style.color="black";
+              }
+            </script>
+          </li>
         </ul>
       </div>
     </nav>

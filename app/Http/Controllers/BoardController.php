@@ -83,7 +83,7 @@ class BoardController extends Controller
 
         } elseif ($order['status'] == "printed") {
           $new_data["status"] = 2;
-          $new_data["class"] = "table-primary";
+          $new_data["class"] = "table-success";
         } else {
           $new_data["status"] = 3;
           $new_data["class"] = "table-secondary";
@@ -141,10 +141,14 @@ class BoardController extends Controller
         ];
 
         $number = $request->input("pk");
-
-        return Woocommerce::put("orders/$number", $data);
-      } elseif ($request->input("name") == "prepare_by") {
-        \Log::info($request->input());
+        try {
+            $newproduct = Woocommerce::put("orders/$number", $data);;
+        } catch(HttpClientException $e) {
+            return("Woocommerce error");
+        }
+      }
+      elseif ($request->input("name") == "prepare_by") {
+        Log::info($request->input());
         $data = [
           "meta_data" => [
             [
@@ -159,6 +163,6 @@ class BoardController extends Controller
         return Woocommerce::put("orders/$number", $data);
       }
 
-      return "ok";
+      return "done";
     }
 }
