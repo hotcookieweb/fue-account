@@ -106,19 +106,24 @@
       request += builder.createRuledLineElement();
 
       @foreach($order["line_items"] as $item)
+        save_request = request;
         request += builder.createTextElement({data: '{{ $item["quantity"] }}    {{ $item["name"] }}\n'});
         @foreach ($item["meta_data"] as $md)
           @php
           $key = str_replace("pa_", "", $md["key"]); // meta data passed as slugs, not names
           @endphp
-          request += builder.createTextElement({font: 'font_b'});
-          @php
-          // filter any newlines customer may have added.
-            $mdval = htmlspecialchars_decode($md["value"]);
-            $mdval = preg_replace('/\r\n|\r|\n/','\\\n',$mdval);
-          @endphp
-          request += builder.createTextElement({data: ' {{ $key }}: {{ $mdval }}\n'});
-          request += builder.createTextElement({font: 'font_a'});
+          @if ($key  == "_no_packing_slip")  // don't print out charity items
+            request = save_request;
+          @else
+            request += builder.createTextElement({font: 'font_b'});
+            @php
+            // filter any newlines customer may have added.
+              $mdval = htmlspecialchars_decode($md["value"]);
+              $mdval = preg_replace('/\r\n|\r|\n/','\\\n',$mdval);
+            @endphp
+            request += builder.createTextElement({data: ' {{ $key }}: {{ $mdval }}\n'});
+            request += builder.createTextElement({font: 'font_a'});
+          @endif
         @endforeach
       @endforeach
       request += builder.createRuledLineElement({thickness:'double_thin'});
