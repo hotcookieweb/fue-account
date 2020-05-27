@@ -99,7 +99,7 @@ class FUE_Account_Endpoint {
 		$logout = $items['customer-logout'];
 		unset( $items['customer-logout'] );
 		// Insert your custom endpoint.
-		$items[ $this->pref_endpoint ] = __( get_option( 'fue_email_subscriptions_page_title', 'Update Subscriptions' ), 'woocommerce' );
+		$items[ $this->pref_endpoint ] = __( get_option( 'fue_email_subscriptions_page_title', 'Email Subscriptions' ), 'woocommerce' );
 
 		// Insert back the logout item.
 		$items['customer-logout'] = $logout;
