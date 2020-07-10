@@ -16,7 +16,9 @@
 			<thead class="thead-dark">
 				<tr>
 					<th data-sortable="true" data-field="number" data-formatter="format_link">Order #</th>
-					<th data-sortable="true" data-field="shipping_zone">Ship Zone</th>
+					@if (Auth::user()->email == 'admin')
+						<th data-sortable="true" data-field="shipping_zone">Ship Zone</th>
+					@endif
 					<th data-sortable="true" data-field="delivery_type">Delivery Type</th>
 					<th data-sortable="true" data-field="ready_date">Ready Date</th>  <!-- should search on ready_sort data -->
 					<th data-sortable="true" data-field="ready_time">Ready Time</th>  <!-- should search on ready_sort data -->
