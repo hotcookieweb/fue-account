@@ -1,3 +1,3 @@
-# feu-account
+# fue-account
 
 Plugin to integrated FUE email subscriptions management into woocommerce account management
