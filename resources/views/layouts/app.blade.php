@@ -40,9 +40,14 @@
           <li class="nav-item active" style="padding-left: 20px">
             <a class="nav-link" href="/manage/zones">Zones <span class="sr-only">(current)</span></a>
           </li>
-          @if(Auth::check())
-            <li class="nav-item" style="padding-left: 20px">
-              <a class="nav-link active" href="/logout">Logout <span class="sr-only">(current)</span></a>
+          @if (Auth::user())
+            @if (Auth::user()->email == 'admin')
+              <li class="nav-item active" style="padding-left: 20px">
+                <a class="nav-link" href="/manage/users">Manage Users<span class="sr-only">(current)</span></a>
+              </li>
+            @endif
+            <li class="nav-item active" style="padding-left: 20px">
+              <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
             </li>
           @endif
           <li class="nav" style="padding-left: 20px;">
