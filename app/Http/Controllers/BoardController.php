@@ -12,7 +12,7 @@ class BoardController extends Controller
 {
   public function board() {
     $params = [
-      'status' => array ('processing','printed','done'),
+      'status' => array ('on-hold','processing','printed','done'),
       'per_page' => 100
     ];
 
@@ -81,10 +81,12 @@ class BoardController extends Controller
       $new_data["ready_date"] = '<span style="display:none">' . $ready_sort . '</span>' . $ready_date;
       $new_data["ready_time"] = '<span style="display:none">' . $ready_sort . '</span>' . $ready_time;
 
-      if ($order['status'] == "processing") {
+      if ($order['status'] == "on-hold") {
+        $new_data["status"] = 0;
+        $new_data["class"] = "table-info";
+      } elseif ($order['status'] == "processing") {
         $new_data["status"] = 1;
         $new_data["class"] = "table-light";
-
       } elseif ($order['status'] == "printed") {
         $new_data["status"] = 2;
         $new_data["class"] = "table-success";
@@ -113,7 +115,12 @@ class BoardController extends Controller
 
   public function statuses() {
     $statuses = [];
-
+    if (Auth::user()->email == 'admin') {
+    $statuses[] = [
+        "value" => 0,
+        "text" => "On hold"
+      ];
+    }
     $statuses[] = [
       "value" => 1,
       "text" => "Processing"
@@ -141,7 +148,9 @@ class BoardController extends Controller
   public function update(Request $request) {
     if ($request->input("name") == "status") {
 
-      if ($request->input("value") == "1") {
+      if ($request->input("value") == "0") {
+        $status = "on-hold";
+      } elseif ($request->input("value") == "1") {
         $status = "processing";
       } elseif ($request->input("value") == "2") {
         $status = "printed";
