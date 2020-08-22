@@ -11,10 +11,18 @@ use Woocommerce;
 class BoardController extends Controller
 {
   public function board() {
-    $params = [
-      'status' => array ('on-hold','processing','printed','done'),
-      'per_page' => 100
-    ];
+    if (Auth::user()->email == 'admin') {
+      $params = [
+        'status' => array ('on-hold','processing','printed','done'),
+        'per_page' => 100
+      ];
+    }
+    else {
+      $params = [
+        'status' => array ('processing','printed','done'),
+        'per_page' => 100
+      ];
+    }
 
 
     $orders = Woocommerce::get('orders', $params);
